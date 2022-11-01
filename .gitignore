@@ -1,2 +1,6 @@
 venv/
 .env
+__pycache__
+amnid/__pycache__/
+amnid/users/__pycache__
+tests.py

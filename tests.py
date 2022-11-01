@@ -1,4 +1,5 @@
-def check(**kwargs):
+def check(*args, **kwargs):
+    print(args)
     data = kwargs['data']
     print(data)
     for key, value in data.items():
@@ -6,4 +7,4 @@ def check(**kwargs):
         if len(value) == 0:
             return f'{key} is empty!'
 
-print(check(data = {'name':'', 'first':'Nodebe'}))
+print(check('2','3',data = {'name':'', 'first':'Nodebe'}))
