@@ -1,6 +1,6 @@
 from flask import Blueprint
 from flask_pydantic import validate
-from .schema import CreateUsersParam, CreateUserResponse, SuccessResponse, ErrorResponse, UsersResponseParam
+from .schema import CreateUsersParam, CreateUserResponse, LoginUserResponseParam, SuccessResponse, ErrorResponse, UsersResponseParam, LoginUserParam
 from .user_class import UserObj
 
 users = Blueprint('users', __name__)
@@ -14,8 +14,24 @@ def create(body: CreateUsersParam):
         create_new_user = new_user.create_user()
 
         return SuccessResponse(
-            message=create_new_user['message'],
+            message = create_new_user['message'],
             data = UsersResponseParam(**create_new_user['data'].__dict__)
+        )
+
+    except Exception as e:
+        return ErrorResponse(message=str(e))
+
+@users.post('/login')
+@validate()
+def login(body: LoginUserParam):
+    user = UserObj(body=body)
+
+    try:
+        login_user = user.login_user()
+
+        return SuccessResponse(
+            message = login_user['message'],
+            data = LoginUserResponseParam(**login_user['data'])
         )
 
     except Exception as e:

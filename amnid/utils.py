@@ -1,4 +1,5 @@
 import re
+import base64
 from passlib.context import CryptContext
 from amnid.errors import UserError
 

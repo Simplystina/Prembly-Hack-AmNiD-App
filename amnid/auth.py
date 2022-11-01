@@ -8,15 +8,16 @@ load_dotenv()
 # Values gotten from environment variables
 SECRET_KEY = os.getenv('SECRET_KEY')
 ALGORITHM = os.getenv('ALGORITHM')
-ACCESS_TOKEN_EXPIRE_MINUTES = os.getenv('ACCESS_TOKEN_EXPIRE_MINUTES')
+ACCESS_TOKEN_EXPIRE_MINUTES = int(os.getenv('ACCESS_TOKEN_EXPIRE_MINUTES'))
 
 
 def create_access_token(data: dict):
     ''' Generating the jwt tokens used across the service.'''
-    to_encode = data.copy()
+    data = data.__dict__
+    data['date_of_joining'] = int(round(data['date_of_joining'].timestamp()))
     expire = datetime.now() + timedelta(minutes = ACCESS_TOKEN_EXPIRE_MINUTES)
-    to_encode.update({'exp': expire})
+    data.update({'exp': expire})
 
-    encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
+    encoded_jwt = jwt.encode(data, SECRET_KEY)
 
     return encoded_jwt
