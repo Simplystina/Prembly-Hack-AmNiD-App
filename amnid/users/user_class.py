@@ -7,7 +7,6 @@ from amnid.models import Image, User
 from amnid.utils import verify_hashed_password, verify_params, hash_password, verify_secure_password
 from verify_email import verify_email
 from amnid.errors import UserError
-from amnid.database_class import Database
 
 class UserObj:
     def __init__(self, **data):
