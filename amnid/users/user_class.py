@@ -1,7 +1,6 @@
-import re
 from flask import request
 from .schema import UserInfoParam
-from amnid.auth import create_access_token
+from amnid.auth import create_token
 from amnid.main import db
 from amnid.models import Image, User
 from amnid.utils import verify_hashed_password, verify_params, hash_password, verify_secure_password
@@ -80,10 +79,7 @@ class UserObj:
             raise UserError('Email does not exist!')
         
         # Verify the user's password
-        user_password = get_user.password
-        verify_password = verify_hashed_password(self.password, user_password)
-        if verify_password == False:
-            raise UserError('Password is incorrect!')
+        verify_hashed_password(self.password, get_user.password)
 
         # Add image to send to client-side
         image = request.host_url + f"static/img/{get_user.user_image.img_string}"
@@ -91,7 +87,7 @@ class UserObj:
         user_data = UserInfoParam(**get_user.__dict__)
 
         # Generate token
-        token = create_access_token(user_data)
+        token = create_token(user_data)
 
         return {'status': True, 'message': 'User logged in!', 'data': {'jwt_token': token, 'user_icon': image}}
         

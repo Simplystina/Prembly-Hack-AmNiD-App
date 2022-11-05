@@ -1,6 +1,8 @@
 from flask import Blueprint
 from flask_pydantic import validate
-from .schema import CreateUsersParam, CreateUserResponse, LoginUserResponseParam, SuccessResponse, ErrorResponse, UsersResponseParam, LoginUserParam
+
+from .schema import CreateUsersParam, LoginUserResponseParam, UsersResponseParam, LoginUserParam
+from amnid.schema import SuccessResponse, ErrorResponse
 from .user_class import UserObj
 
 users = Blueprint('users', __name__)

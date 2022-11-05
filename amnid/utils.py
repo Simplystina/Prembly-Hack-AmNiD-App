@@ -19,7 +19,12 @@ def hash_password(password: str):
     return pwd_context.hash(password)
     
 def verify_hashed_password(plain_password, hashed_password):
-    return pwd_context.verify(plain_password, hashed_password)
+    verified = pwd_context.verify(plain_password, hashed_password)
+    
+    if verified == False:
+        raise UserError('Password is incorrect!')
+
+    return True
 
 def verify_secure_password(password):
     reg = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!#%*?&]{8,20}$"

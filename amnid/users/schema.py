@@ -2,16 +2,7 @@ from pydantic import BaseModel
 from typing import Optional
 from datetime import datetime
 
-class SuccessResponse(BaseModel):
-    ''' Return message for successful activity '''
-    message: str = 'Success'
-    code: str = '00'
-    data: Optional[dict]
-
-class ErrorResponse(BaseModel):
-    ''' Return message for unsuccessful activity '''
-    message: str = 'Error'
-    code: str = 'E00'
+from amnid.schema import SuccessResponse, ErrorResponse
 
 # User's classes
 class CreateUsersParam(BaseModel):
@@ -24,10 +15,6 @@ class CreateUsersParam(BaseModel):
 class UsersResponseParam(BaseModel):
     user_id: str
     email: str
-
-class CreateUserResponse(BaseModel):
-    info: SuccessResponse
-    data: UsersResponseParam
 
 class LoginUserParam(BaseModel):
     id_: Optional[str]
