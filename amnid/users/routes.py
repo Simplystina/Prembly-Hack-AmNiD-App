@@ -37,4 +37,4 @@ def login(body: LoginUserParam):
         )
 
     except Exception as e:
-        return ErrorResponse(message=str(e))
+        return ErrorResponse(message=str(e)), 401

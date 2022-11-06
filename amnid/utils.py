@@ -2,6 +2,7 @@ import re
 import base64
 from passlib.context import CryptContext
 from amnid.errors import UserError
+from amnid.schema import ErrorResponse
 
 pwd_context = CryptContext(schemes=["bcrypt"])
 
@@ -40,3 +41,17 @@ def verify_secure_password(password):
         return {'status': True, 'message': "Valid Password!"}
     else:
         raise UserError("Insecure Password!")
+
+def verify_user(jwt_id, passed_id):
+    if jwt_id != passed_id:
+        return ErrorResponse(
+            message = 'Unauthorised Access!'
+            ), 401
+
+    return False
+
+def validate_data_length(key:str, value:str, min_length=0, max_length=float('inf')):
+    if len(value.strip()) < min_length+1:
+        raise UserError(f"{key} should be more than {min_length} character's")
+    elif len(value.strip()) > max_length:
+        raise UserError(f"{key} should be less than {max_length} character's")

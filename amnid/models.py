@@ -12,8 +12,25 @@ class User(db.Model):
     verify_status = db.Column(db.Integer, server_default='0')
     date_of_joining = db.Column(db.TIMESTAMP(timezone=True), nullable=False, server_default=text('now()'))
     user_image = db.relationship('Image', backref='user', lazy=True, uselist=False, cascade="all, delete")
+    user_stores = db.relationship('Store', backref='user', lazy=True, cascade="all, delete")
 
 class Image(db.Model):
     id = db.Column(db.Integer, primary_key= True, nullable=False)
     user_id = db.Column(db.String, db.ForeignKey('user.user_id'), nullable=False, unique=True)
     img_string = db.Column(db.String, nullable=False, server_default='user.png')
+
+class Store(db.Model):
+    id = db.Column(db.Integer, primary_key=True, nullable=False)
+    user_id = db.Column(db.String, db.ForeignKey('user.user_id'), nullable=False)
+    name = db.Column(db.String(20), nullable=False)
+    description = db.Column(db.String(300))
+    date_of_creation = db.Column(db.TIMESTAMP(timezone=True), nullable=False, server_default=text('now()'))
+    social_media = db.relationship('SocialMedia', backref='store', lazy=True, uselist=False, cascade="all, delete")
+
+class SocialMedia(db.Model):
+    id = db.Column(db.Integer, primary_key=True, nullable=False)
+    store_id = db.Column(db.Integer, db.ForeignKey('store.id'), unique=True, nullable=False)
+    facebook = db.Column(db.String, server_default='#')
+    instagram = db.Column(db.String, server_default='#')
+    twitter = db.Column(db.String, server_default='#')
+    tiktok = db.Column(db.String, server_default='#')

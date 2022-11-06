@@ -1,17 +1,27 @@
 import os
 import psycopg2
-from flask import Flask, request
+from flask import Flask, jsonify, request
 from flask_sqlalchemy import SQLAlchemy
 from dotenv import load_dotenv
 from datetime import datetime, timedelta
 from flask_migrate import Migrate
 from flask_jwt_extended import JWTManager
 
+from amnid.schema import ErrorResponse
+
 load_dotenv()
 app = Flask(__name__)
 db = SQLAlchemy()
 migrate = Migrate(app, db)
 jwt = JWTManager(app)
+
+# Configure JWT
+@jwt.expired_token_loader
+def my_expired_token_callback(jwt_header, jwt_payload):
+    return jsonify(
+        code = 'E10',
+        message = 'Access token has expired!'
+    ), 401
 
 # Configure application
 app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('SQLALCHEMY_DATABASE_URI') or "sqlite:///amnid.db"
