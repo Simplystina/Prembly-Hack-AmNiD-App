@@ -12,3 +12,6 @@ Use the package manager [pip](https://pip.pypa.io/en/stable/) to install necessa
 ```bash
 pip install -r requirements.txt
 ```
+
+## API Documentation
+Use the link [AMNID_API](https://documenter.getpostman.com/view/16553335/2s8YYHMPFv) to view the full documentation for endpoints.
