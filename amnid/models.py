@@ -13,6 +13,7 @@ class User(db.Model):
     date_of_joining = db.Column(db.TIMESTAMP(timezone=True), nullable=False, server_default=text('now()'))
     user_image = db.relationship('Image', backref='user', lazy=True, uselist=False, cascade="all, delete")
     user_stores = db.relationship('Store', backref='user', lazy=True, cascade="all, delete")
+    user_social_media = db.relationship('SocialMedia', backref='user', lazy=True, uselist=False, cascade="all, delete")
 
 class Image(db.Model):
     id = db.Column(db.Integer, primary_key= True, nullable=False)
@@ -29,7 +30,8 @@ class Store(db.Model):
 
 class SocialMedia(db.Model):
     id = db.Column(db.Integer, primary_key=True, nullable=False)
-    store_id = db.Column(db.Integer, db.ForeignKey('store.id'), unique=True, nullable=False)
+    user_id = db.Column(db.String, db.ForeignKey('user.user_id'), unique=True)
+    store_id = db.Column(db.Integer, db.ForeignKey('store.id'), unique=True)
     facebook = db.Column(db.String, server_default='#')
     instagram = db.Column(db.String, server_default='#')
     twitter = db.Column(db.String, server_default='#')

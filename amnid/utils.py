@@ -42,8 +42,10 @@ def verify_secure_password(password):
     else:
         raise UserError("Insecure Password!")
 
-def verify_user(jwt_id, passed_id):
-    if jwt_id != passed_id:
+def verify_user(jwt_identity, passed_user_id):
+    user_id = jwt_identity['user_id']
+
+    if user_id != passed_user_id:
         return ErrorResponse(
             message = 'Unauthorised Access!'
             ), 401

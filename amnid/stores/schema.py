@@ -1,4 +1,4 @@
-from pydantic import BaseModel, validator, ValidationError
+from pydantic import BaseModel
 from typing import Optional
 from datetime import datetime
 
@@ -14,7 +14,6 @@ class SocialMediaParam(BaseModel):
         orm_mode = True
 
 class CreateStoresParam(BaseModel):
-    id_: Optional[str]
     user_id: str
     name: str
     description: Optional[str]
@@ -29,3 +28,27 @@ class UserStoreResponseParam(BaseModel):
 
     class Config:
         orm_mode = True
+
+class FetchStoresParam(BaseModel):
+    user_id: str
+
+class FetchStoresResponse(BaseModel):
+    stores: list[UserStoreResponseParam]
+
+class FetchStoreParam(BaseModel):
+    store_id: int
+    user_id: str
+
+class EditStoreInfoParam(BaseModel):
+    store_id: int
+    user_id: str
+    name: str
+    description: str
+
+    class Config:
+        orm_mode = True
+
+class EditStoreSocialMediaParam(BaseModel):
+    store_id: int
+    user_id: str
+    social_media: SocialMediaParam
