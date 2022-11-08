@@ -1,23 +1,18 @@
 from flask import request
+
+from amnid.social_media.social_media_class import UserSocialMediaObj
 from .schema import UserInfoParam
 from amnid.auth import create_token
 from amnid.main import db
 from amnid.models import Image, User
 from amnid.utils import verify_hashed_password, verify_params, hash_password, verify_secure_password
 from verify_email import verify_email
-from amnid.errors import UserError
+from amnid.errors import ServerError, UserError
 
 class UserObj:
-    def __init__(self, **data):
-        data = data['body']
-
-        self.id_ = data.id_
-        self.first_name = data.first_name
-        self.last_name = data.last_name
-        self.email = data.email
-        self.password = data.password
-        self.data = data
-
+    def __init__(self, user_id=None):
+        self.user_id = user_id
+        
     def generate_user_id(self):
         last_id = User.query.order_by(User.id.desc()).first()
 
@@ -34,7 +29,14 @@ class UserObj:
 
         return email
 
-    def create_user(self):
+    def create_user(self, **data):
+        data = data['body']
+        self.first_name = data.first_name
+        self.last_name = data.last_name
+        self.email = data.email
+        self.password = data.password
+        self.data = data
+
         check_data = verify_params('id_', params=self.data.dict())
         # Validating data
         if check_data['status'] == False:
@@ -70,9 +72,12 @@ class UserObj:
         if new_user:
             return {'status': True, 'message': 'User created!', 'data': new_user}
         else:
-            return {'status': True, 'message': 'User not created!', 'data': {}}
+            raise ServerError('User not created!')
 
-    def login_user(self):
+    def login_user(self, email, password):
+        self.email = email
+        self.password = password
+
         get_user = self.check_email_exists(email=self.email)
 
         if get_user == None:
@@ -91,4 +96,26 @@ class UserObj:
 
         return {'status': True, 'message': 'User logged in!', 'data': {'jwt_token': token, 'user_icon': image}}
         
-        
+    def add_social_media(self, social_media):
+        try:
+            social_media = UserSocialMediaObj(user_id=self.user_id, social_media=social_media)
+            social_media.create_social_media()
+        except Exception as e:
+            raise ServerError('Server Error!')
+
+        if social_media:
+            return {'status': True, 'message': 'Social media updated!', 'data': social_media}
+        else:
+            raise ServerError('Social media not updated!')
+
+    def edit_social_media(self, passed_social_media):
+        user = User.query.filter_by(user_id=self.user_id).first()
+
+        social_media = UserSocialMediaObj(user_id=self.user_id, social_media=user.user_social_media)
+
+        social_media.edit_social_media(new_social_media=passed_social_media)
+
+        if social_media:
+            return {'status': True, 'message': 'Social media updated!', 'data': social_media}
+        else:
+            raise ServerError('Social media not updated!')

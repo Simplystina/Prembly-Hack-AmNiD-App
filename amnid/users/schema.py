@@ -2,7 +2,7 @@ from pydantic import BaseModel
 from typing import Optional
 from datetime import datetime
 
-from amnid.schema import SuccessResponse, ErrorResponse
+from amnid.schema import SocialMediaParam, SuccessResponse, ErrorResponse
 
 # User's classes
 class CreateUsersParam(BaseModel):
@@ -35,3 +35,13 @@ class UserInfoParam(BaseModel):
 class LoginUserResponseParam(BaseModel):
     jwt_token: str
     user_icon: str
+
+class UserSocialMediaParam(BaseModel):
+    user_id: str
+    social_media: SocialMediaParam
+
+class UserSocialMediaResponse(BaseModel):
+    social_media: SocialMediaParam
+
+    class Config:
+        orm_mode = True

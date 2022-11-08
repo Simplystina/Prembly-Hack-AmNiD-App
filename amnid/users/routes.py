@@ -1,7 +1,10 @@
 from flask import Blueprint
+from flask_jwt_extended import get_jwt_identity, jwt_required
 from flask_pydantic import validate
 
-from .schema import CreateUsersParam, LoginUserResponseParam, UsersResponseParam, LoginUserParam
+from amnid.utils import verify_user
+
+from .schema import CreateUsersParam, LoginUserResponseParam, UserSocialMediaParam, UserSocialMediaResponse, UsersResponseParam, LoginUserParam
 from amnid.schema import SuccessResponse, ErrorResponse
 from .user_class import UserObj
 
@@ -10,10 +13,10 @@ users = Blueprint('users', __name__)
 @users.post('/create')
 @validate()
 def create(body: CreateUsersParam):
-    new_user = UserObj(body=body)
+    new_user = UserObj()
 
     try:
-        create_new_user = new_user.create_user()
+        create_new_user = new_user.create_user(body=body)
 
         return SuccessResponse(
             message = create_new_user['message'],
@@ -26,10 +29,10 @@ def create(body: CreateUsersParam):
 @users.post('/login')
 @validate()
 def login(body: LoginUserParam):
-    user = UserObj(body=body)
+    user = UserObj()
 
     try:
-        login_user = user.login_user()
+        login_user = user.login_user(email=body.email, password=body.password)
 
         return SuccessResponse(
             message = login_user['message'],
@@ -38,3 +41,47 @@ def login(body: LoginUserParam):
 
     except Exception as e:
         return ErrorResponse(message=str(e)), 401
+
+@users.post('/add_social_media')
+@jwt_required()
+@validate()
+def add_social_media(body: UserSocialMediaParam):
+    verify = verify_user(get_jwt_identity(), body.user_id)
+    if verify: return verify
+
+    user_obj = UserObj(user_id=body.user_id)
+
+    try:
+        add_user_social = user_obj.add_social_media(social_media=body.social_media)
+
+        return SuccessResponse(
+            message = add_user_social['message'],
+            data = UserSocialMediaResponse(
+                **add_user_social['data'].__dict__
+            )
+        )
+    
+    except Exception as e:
+        return ErrorResponse(message=str(e)), 400
+    
+@users.patch('/edit_social_media')
+@jwt_required()
+@validate()
+def edit_social_media(body: UserSocialMediaParam):
+    verify = verify_user(get_jwt_identity(), body.user_id)
+    if verify: return verify
+
+    user_obj = UserObj(user_id=body.user_id)
+
+    try:
+        edit_user_social = user_obj.edit_social_media(passed_social_media=body.social_media.dict())
+
+        return SuccessResponse(
+            message = edit_user_social['message'],
+            data = UserSocialMediaResponse(
+                **edit_user_social['data'].__dict__
+            )
+        )
+    
+    except Exception as e:
+        return ErrorResponse(message=str(e)), 400

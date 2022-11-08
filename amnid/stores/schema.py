@@ -2,16 +2,7 @@ from pydantic import BaseModel
 from typing import Optional
 from datetime import datetime
 
-from amnid.schema import ErrorResponse
-
-class SocialMediaParam(BaseModel):
-    facebook: Optional[str] = "#"
-    instagram: Optional[str] = "#"
-    twitter: Optional[str] = "#"
-    tiktok: Optional[str] = "#"
-
-    class Config:
-        orm_mode = True
+from amnid.schema import SocialMediaParam
 
 class CreateStoresParam(BaseModel):
     user_id: str
