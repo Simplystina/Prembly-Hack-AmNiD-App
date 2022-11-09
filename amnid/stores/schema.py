@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from typing import Optional
+from typing import Optional, List
 from datetime import datetime
 
 from amnid.schema import SocialMediaParam
@@ -24,7 +24,7 @@ class FetchStoresParam(BaseModel):
     user_id: str
 
 class FetchStoresResponse(BaseModel):
-    stores: list[UserStoreResponseParam]
+    stores: List[UserStoreResponseParam]
 
 class FetchStoreParam(BaseModel):
     store_id: int
