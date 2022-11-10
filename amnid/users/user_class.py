@@ -18,8 +18,10 @@ class UserObj:
 
         if last_id == None:
             last_id = 0
+        else:
+            last_id = last_id.id
 
-        last_id_inc = str(int(last_id.id) + 1)
+        last_id_inc = str(int(last_id) + 1)
 
         # The rjust attaches 0s if the length of the last_id_inc is less than 3
         self.user_id = 'AMN' + last_id_inc.rjust(3, '0')
