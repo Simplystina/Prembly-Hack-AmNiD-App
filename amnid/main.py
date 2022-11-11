@@ -1,19 +1,20 @@
 import os
 import psycopg2
-from flask import Flask, jsonify, request
+
+from flask import Flask, jsonify
+from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
-from dotenv import load_dotenv
-from datetime import datetime, timedelta
 from flask_migrate import Migrate
 from flask_jwt_extended import JWTManager
-
-from amnid.schema import ErrorResponse
+from dotenv import load_dotenv
+from datetime import timedelta
 
 load_dotenv()
 app = Flask(__name__)
 db = SQLAlchemy()
 migrate = Migrate(app, db)
 jwt = JWTManager(app)
+CORS(app)
 
 # Configure JWT
 @jwt.expired_token_loader
