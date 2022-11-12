@@ -56,13 +56,9 @@ def fetch_all(body: FetchStoresParam):
         return ErrorResponse(message=str(e)), 400
 
 @stores.get('/fetch_one')
-@jwt_required()
 @validate()
 def fetch_one(body: FetchStoreParam):
-    verify = verify_user(get_jwt_identity(), body.user_id)
-    if verify: return verify
-
-    store_obj = StoreObj(user_id=body.user_id)
+    store_obj = StoreObj(user_id=0)
 
     try:
         fetch_store = store_obj.fetch_one(store_id=body.store_id)

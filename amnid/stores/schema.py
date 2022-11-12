@@ -28,7 +28,6 @@ class FetchStoresResponse(BaseModel):
 
 class FetchStoreParam(BaseModel):
     store_id: int
-    user_id: str
 
 class EditStoreInfoParam(BaseModel):
     store_id: int
