@@ -15,10 +15,6 @@ class Ratings:
     def rate_vendor(self, **data):
         data = data['data']
 
-        # self.vendor_id = data['vendor_id']
-        # self.rate = data['rate']
-        # self.comment = data['comment']
-
         rater_name = f'{self.user.first_name} {self.user.last_name}'
         rater_image = self.user.user_image.img_string
         del data['user_id']
