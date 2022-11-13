@@ -1,13 +1,12 @@
 import os
-import psycopg2
+from datetime import timedelta
 
+from dotenv import load_dotenv
 from flask import Flask, jsonify
 from flask_cors import CORS
-from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate
 from flask_jwt_extended import JWTManager
-from dotenv import load_dotenv
-from datetime import timedelta
+from flask_migrate import Migrate
+from flask_sqlalchemy import SQLAlchemy
 
 load_dotenv()
 app = Flask(__name__)
@@ -31,12 +30,14 @@ app.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(minutes=int(os.getenv('ACCESS
 
 DEFAULT_IMAGE_STRING = os.getenv('DEFAULT_IMAGE_STRING')
 
-from .users.routes import users
 from .stores.routes import stores
+from .users.routes import users
+from .ratings.routes import ratings
 
 # Register blueprints
 app.register_blueprint(users, url_prefix='/users')
 app.register_blueprint(stores, url_prefix='/stores')
+app.register_blueprint(ratings, url_prefix='/ratings')
 
 from .models import *
 

@@ -14,6 +14,7 @@ class User(db.Model):
     user_image = db.relationship('Image', backref='user', lazy=True, uselist=False, cascade="all, delete")
     user_stores = db.relationship('Store', backref='user', lazy=True, cascade="all, delete")
     user_social_media = db.relationship('SocialMedia', backref='user', lazy=True, uselist=False, cascade="all, delete")
+    ratings = db.relationship('Rating', backref='user', lazy=True, cascade="all, delete")
 
 class Image(db.Model):
     id = db.Column(db.Integer, primary_key= True, nullable=False)
@@ -36,3 +37,11 @@ class SocialMedia(db.Model):
     instagram = db.Column(db.String, server_default='#')
     twitter = db.Column(db.String, server_default='#')
     tiktok = db.Column(db.String, server_default='#')
+
+class Rating(db.Model):
+    id = db.Column(db.Integer, primary_key=True, nullable=False)
+    vendor_id = db.Column(db.String, db.ForeignKey('user.user_id'))
+    rate = db.Column(db.Integer, nullable=False)
+    comment = db.Column(db.Text)
+    rater_name = db.Column(db.String, nullable=False)
+    rater_image = db.Column(db.String, nullable=False)

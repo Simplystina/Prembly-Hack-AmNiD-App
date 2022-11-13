@@ -12,6 +12,11 @@ from amnid.errors import ServerError, UserError
 class UserObj:
     def __init__(self, user_id=None):
         self.user_id = user_id
+
+    def get_user(self):
+        find_user = User.query.filter_by(user_id=self.user_id).first()
+
+        return find_user
         
     def generate_user_id(self):
         last_id = User.query.order_by(User.id.desc()).first()
