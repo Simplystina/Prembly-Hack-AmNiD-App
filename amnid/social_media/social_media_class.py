@@ -18,7 +18,6 @@ class SocialMediaObj:
         db.session.refresh(social_media)
 
     def edit_social_media(self, new_social_media):
-        # print(new_social_media.__dict__)
         self.update(new_social_media)
 
         db.session.commit()

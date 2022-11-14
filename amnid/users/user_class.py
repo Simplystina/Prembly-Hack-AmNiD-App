@@ -116,7 +116,7 @@ class UserObj:
             raise ServerError('Social media not updated!')
 
     def edit_social_media(self, passed_social_media):
-        user = User.query.filter_by(user_id=self.user_id).first()
+        user = self.get_user()
 
         social_media = UserSocialMediaObj(user_id=self.user_id, social_media=user.user_social_media)
 
@@ -126,3 +126,18 @@ class UserObj:
             return {'status': True, 'message': 'Social media updated!', 'data': social_media}
         else:
             raise ServerError('Social media not updated!')
+
+    def edit_user_info(self, user_info):
+        user = self.get_user()
+
+        if user.verified == True:
+            raise UserError('Details cannot be edited after verification!')
+        
+        user.first_name = user_info['first_name']
+        user.last_name = user_info['last_name']
+        user.email = user_info['email']
+
+        db.session.commit()
+        db.session.refresh(user)
+
+        return {'status': True, 'message': 'Info updated!', 'data': user}

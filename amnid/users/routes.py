@@ -4,7 +4,7 @@ from flask_pydantic import validate
 
 from amnid.utils import verify_user
 
-from .schema import CreateUsersParam, LoginUserResponseParam, UserSocialMediaParam, UserSocialMediaResponse, UsersResponseParam, LoginUserParam
+from .schema import CreateUsersParam, LoginUserResponseParam, UserEditInfoParam, UserInfoParam, UserInfoResponse, UserSocialMediaParam, UserSocialMediaResponse, UsersResponseParam, LoginUserParam
 from amnid.schema import SuccessResponse, ErrorResponse
 from .user_class import UserObj
 
@@ -63,7 +63,30 @@ def add_social_media(body: UserSocialMediaParam):
     
     except Exception as e:
         return ErrorResponse(message=str(e)), 400
+
+@users.patch('/edit_user_info')
+@jwt_required()
+@validate()
+def edit_user_info(body: UserEditInfoParam):
+    verify = verify_user(get_jwt_identity(), body.user_id)
+    if verify: return verify
+
+    user_obj = UserObj(user_id=body.user_id)
+
+    try:
+        edit_user_info = user_obj.edit_user_info(user_info=body.dict())
+
+        return SuccessResponse(
+            message = edit_user_info['message'],
+            data = UserInfoResponse(
+                **edit_user_info['data'].__dict__
+            )
+        )
     
+    except Exception as e:
+        return ErrorResponse(message=str(e)), 400
+
+
 @users.patch('/edit_social_media')
 @jwt_required()
 @validate()

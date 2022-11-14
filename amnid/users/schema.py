@@ -12,6 +12,20 @@ class CreateUsersParam(BaseModel):
     email: str
     password: str
 
+class UserEditInfoParam(BaseModel):
+    user_id: str
+    first_name: str
+    last_name: str
+    email: str
+
+class UserInfoResponse(BaseModel):
+    first_name: str
+    last_name: str
+    email: str
+
+    class Config:
+        orm_mode = True
+
 class UsersResponseParam(BaseModel):
     user_id: str
     email: str
