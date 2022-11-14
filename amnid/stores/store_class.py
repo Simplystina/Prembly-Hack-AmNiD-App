@@ -11,6 +11,7 @@ class StoreObj:
         self.user_id = user_id
 
     def create_store(self, **data):
+        print(data)
         self.name = data.name.strip()
         self.description = data.description.strip()
         self.social_media = data.social_media
