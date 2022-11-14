@@ -11,7 +11,7 @@ class StoreObj:
         self.user_id = user_id
 
     def create_store(self, **data):
-        print(data)
+        data = data['body']
         self.name = data.name.strip()
         self.description = data.description.strip()
         self.social_media = data.social_media
@@ -28,7 +28,7 @@ class StoreObj:
 
         social_media = SocialMediaObj(store_id=new_store.id, social_media=self.social_media)
         social_media.create_social_media()
-    
+
         if new_store:
             return {'status': True, 'message': 'Store created!', 'data': new_store}
         else:
