@@ -14,7 +14,7 @@ class UserObj:
         self.user_id = user_id
 
     def get_user(self):
-        find_user = User.query.filter_by(user_id=self.user_id).first()
+        find_user = User.query.filter_by(user_id=self.user_id.upper()).first()
 
         return find_user
         

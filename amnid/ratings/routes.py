@@ -1,7 +1,7 @@
 from flask import Blueprint, request
 from flask_jwt_extended import get_jwt_identity, jwt_required
 from amnid.ratings.rating_class import Ratings
-from amnid.ratings.schema import RatingParams, RatingResponse
+from amnid.ratings.schema import RatingParams, RatingResponse, VendorRatingResponse, GetRatingsParam, VendorTotalRatingResponse
 from amnid.schema import ErrorResponse, SuccessResponse
 from flask_pydantic import validate
 
@@ -37,5 +37,41 @@ def rate_vendor(body: RatingParams):
             )
         ), 201
     
+    except Exception as e:
+        return ErrorResponse(message=str(e)), 400
+
+
+@ratings.get('/get_ratings')
+@validate()
+def get_ratings(body: GetRatingsParam):
+    rating_obj = Ratings(user_id=body.vendor_id)
+
+    try:
+        get_vendor_rating = rating_obj.get_all_ratings()
+
+        return SuccessResponse(
+            message = get_vendor_rating['message'],
+            data = VendorRatingResponse(
+                data = get_vendor_rating['data']
+            )
+        ), 200
+
+    except Exception as e:
+        return ErrorResponse(message=str(e)), 400
+
+@ratings.get('/get_total_rating')
+@validate()
+def get_total_rating(body: GetRatingsParam):
+    rating_obj = Ratings(user_id=body.vendor_id)
+    
+    try:
+        get_vendor_rating = rating_obj.get_total_rating()
+
+        return SuccessResponse(
+            message = get_vendor_rating['message'],
+            data = VendorTotalRatingResponse(
+                **get_vendor_rating['data']
+            )
+        ), 200
     except Exception as e:
         return ErrorResponse(message=str(e)), 400

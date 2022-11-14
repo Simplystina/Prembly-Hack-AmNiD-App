@@ -1,7 +1,9 @@
 
+from amnid.errors import UserError
 from amnid.main import db
 from amnid.models import Rating
 from amnid.users.user_class import UserObj
+import math
 
 
 class Ratings:
@@ -27,3 +29,27 @@ class Ratings:
 
         return {'status': True, 'message': 'Rated successfully!', 'data': new_rate}
 
+    def get_all_ratings(self):
+
+        if self.user != None:
+            return {'status': True, 'message': 'Success!', 'data':self.user.ratings}
+        else:
+            raise UserError('Vendor not found!')
+    
+    def get_total_rating(self):
+        if self.user == None:
+            raise UserError('Vendor not found!')
+
+        ratings = self.user.ratings
+        ratings_count = len(ratings)
+
+        if ratings_count == 0:
+            return {'status': True, 'message': 'Success!', 'data':{'ratings_count': ratings_count, 'rating': 0}}
+        
+        total = 0
+        for row in ratings:
+            total += int(row.rate)
+        
+        average = round(total/ratings_count)
+
+        return {'status': True, 'message': 'Success!', 'data':{'ratings_count': ratings_count, 'rating': average}}
