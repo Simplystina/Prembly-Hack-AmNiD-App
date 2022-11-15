@@ -16,6 +16,9 @@ class UserObj:
     def get_user(self):
         find_user = User.query.filter_by(user_id=self.user_id.upper()).first()
 
+        if find_user == None:
+            raise UserError('User not found!')
+            
         return find_user
         
     def generate_user_id(self):

@@ -33,11 +33,13 @@ DEFAULT_IMAGE_STRING = os.getenv('DEFAULT_IMAGE_STRING')
 from .stores.routes import stores
 from .users.routes import users
 from .ratings.routes import ratings
+from .search.routes import search
 
 # Register blueprints
 app.register_blueprint(users, url_prefix='/users')
 app.register_blueprint(stores, url_prefix='/stores')
 app.register_blueprint(ratings, url_prefix='/ratings')
+app.register_blueprint(search, url_prefix='/search')
 
 from .models import *
 

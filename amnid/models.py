@@ -24,7 +24,7 @@ class Image(db.Model):
 class Store(db.Model):
     id = db.Column(db.Integer, primary_key=True, nullable=False)
     user_id = db.Column(db.String, db.ForeignKey('user.user_id'), nullable=False)
-    name = db.Column(db.String(20), nullable=False)
+    name = db.Column(db.String(20), nullable=False, unique=True)
     description = db.Column(db.String(300))
     date_of_creation = db.Column(db.TIMESTAMP(timezone=True), nullable=False, server_default=text('now()'))
     social_media = db.relationship('SocialMedia', backref='store', lazy=True, uselist=False, cascade="all, delete")
