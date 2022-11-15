@@ -1,4 +1,5 @@
 
+from sqlalchemy import func
 from amnid.errors import ServerError, UserError
 from amnid.main import db
 from amnid.models import Store, User
@@ -10,6 +11,12 @@ class StoreObj:
     def __init__(self, user_id) -> None:
         self.user_id = user_id
 
+    def check_store_exists(self, store_name):
+        check_store = Store.query.filter(func.lower(Store.name) == func.lower(store_name)).first()
+
+        if check_store:
+            raise UserError('Store Already exists!')
+
     def create_store(self, **data):
         data = data['body']
         self.name = data.name.strip()
@@ -18,6 +25,9 @@ class StoreObj:
 
         validate_data_length(key='name', value=self.name, min_length=3, max_length=20)
         validate_data_length(key='description', value=self.description, max_length=300)
+
+        # Check store exists
+        self.check_store_exists(self.name)
 
         # Add store to database
         new_store = Store(user_id=self.user_id, name=self.name, description=self.description)
