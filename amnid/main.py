@@ -7,6 +7,7 @@ from flask_cors import CORS
 from flask_jwt_extended import JWTManager
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
+from flask_caching import Cache
 
 load_dotenv()
 app = Flask(__name__)
@@ -28,23 +29,31 @@ app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('SQLALCHEMY_DATABASE_URI') or 
 app.config['JWT_SECRET_KEY'] = os.getenv('SECRET_KEY')
 app.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(minutes=int(os.getenv('ACCESS_TOKEN_EXPIRE_MINUTES')))
 
+app.config["CACHE_TYPE"] = "SimpleCache"
+app.config["CACHE_DEFAULT_TIMEOUT"] = 300
+cache = Cache(app)
+cache.init_app(app)
+
 DEFAULT_IMAGE_STRING = os.getenv('DEFAULT_IMAGE_STRING')
 
 from .stores.routes import stores
 from .users.routes import users
 from .ratings.routes import ratings
 from .search.routes import search
+from .bank.routes import banks
 
 # Register blueprints
 app.register_blueprint(users, url_prefix='/users')
 app.register_blueprint(stores, url_prefix='/stores')
 app.register_blueprint(ratings, url_prefix='/ratings')
 app.register_blueprint(search, url_prefix='/search')
+app.register_blueprint(banks, url_prefix='/bank')
 
 from .models import *
 
 # Initialize database
 db.init_app(app)
+migrate.init_app(app, db)
 
 with app.app_context():
     db.create_all()
