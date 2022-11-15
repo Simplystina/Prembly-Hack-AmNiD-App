@@ -16,8 +16,7 @@ import { Box,Modal,
     HStack,
     IconButton,
     Input,
-    Textarea,
-    useStatStyles} from '@chakra-ui/react'
+    Textarea,} from '@chakra-ui/react'
 import React,{useRef, useState} from 'react'
 import {AiFillStar, AiOutlineStar} from "react-icons/ai"
 

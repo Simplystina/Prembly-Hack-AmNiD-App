@@ -6,7 +6,15 @@ export const loginUser = async (values) => {
 	return res
 };
 export const registerUser = async (values) => {
-
 	const res = await axios.post(`users/create`, values,);
 	return res
 };
+
+export const createStore = async(values) =>{
+	const res = await axios.post('stores/create', values)
+	return res
+}
+
+export const updateProfile = async() =>{
+	const res = await axios.patch()
+}

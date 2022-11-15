@@ -2,8 +2,12 @@ import { Avatar, Box, Flex, HStack, Text } from '@chakra-ui/react'
 import React from 'react'
 import DashboardMenu from './DashboardMenu'
 import {FiLogOut} from "react-icons/fi"
+import { logoutUser } from '../../../utils/api'
+import { useRouter } from 'next/router'
 
 const DasboardLayout = ({children}) => {
+
+	
   return (
     <Flex w="full" minH="100vh">
 			<Box
@@ -22,7 +26,7 @@ const DasboardLayout = ({children}) => {
                 <Flex pos="absolute" bottom={3}>
                     <HStack color="#FC5656">
                         <FiLogOut/>
-                        <Text fontWeight="600" fontSize="14px" color="#FC5656">Logout</Text>
+                        <Text cursor="pointer" fontWeight="600" fontSize="14px" color="#FC5656" onClick={logoutUser}>Logout</Text>
                     </HStack>
                 </Flex>
 			</Box>
@@ -38,7 +42,7 @@ const DasboardLayout = ({children}) => {
 				<Box
 					px={["2", "2", "4"]}
 					h="full"
-					flex="1"
+					
 					w="full"
 					bg="#f3f5f7"
 				>

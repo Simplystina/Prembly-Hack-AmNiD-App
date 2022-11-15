@@ -6,6 +6,7 @@ import { useFormik } from 'formik';
  import { loginUser } from '../../../utils/services';
  import { loginAndStoreToken } from '../../../utils/api';
  import { useRouter } from "next/router";
+ import jwt_decode from 'jwt-decode'
 
 
 const LoginForm = () => {
@@ -29,9 +30,13 @@ const LoginForm = () => {
             
           try {
             const data = await loginUser(values)
-            console.log(data,"data")
-            loginAndStoreToken(data.jwt_token)
+            const {sub} = jwt_decode(data?.data?.jwt_token)
+           console.log(sub, " the user here")
 
+            loginAndStoreToken(data?.data?.jwt_token,sub)
+
+
+           
             if(data.message === "User logged in!"){
               toast({ 
                 position: "top-right",

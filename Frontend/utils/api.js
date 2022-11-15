@@ -1,5 +1,5 @@
 import axios from 'axios'
-
+import  Router  from 'next/router'
 
 const server = axios.create({
   baseURL: 'https://amnid-production.up.railway.app/',
@@ -32,21 +32,19 @@ server.interceptors.response.use(
 
 export default server
 
-export const logoutUser = () => {
-	localStorage.removeItem("token");
-	localStorage.removeItem("expiry_time");
-	localStorage.removeItem("remember_me ");
 
-	// destroyCookie(null, 'token')
-	// destroyCookie(null, 'expiry_time')
-	// destroyCookie(null, 'remember_me')
-
-	const prevPath = Router.pathname;
-	let redirectUrl = prevPath.match(/admin/g) ? "/auth/admin" : "/auth/driver";
-	redirectUrl += `/login?redirect=${prevPath}`;
-	Router.push(redirectUrl);
-};
-export const loginAndStoreToken = (token) => {
-	//console.log(token, "the error")
+export const loginAndStoreToken = (token, user) => {
+	
 	localStorage.setItem("token", token);
+  localStorage.setItem("user", JSON.stringify(user))
 };
+
+
+export const logoutUser = ()=>{
+  localStorage.removeItem("token");
+  localStorage.removeItem("user_id");
+	
+	const prevPath = Router.pathname;
+	let redirectUrl = `/login?redirect=${prevPath}`;
+	Router.push(redirectUrl);
+}

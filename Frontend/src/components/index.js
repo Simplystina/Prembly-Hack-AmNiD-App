@@ -13,6 +13,11 @@ export {default as LoginForm} from './Auth/LoginForm'
 
 export {default as VerifyModal} from './Modal/VerifyModal'
 export {default as RatingModal} from './Modal/RatingModal'
+export {default as CreateStoreModal} from './Modal/CreateStoreModal'
 
 
 export {default as Store} from './dashboardComponents/Home/Store'
+
+export {default as Reviews} from './dashboardComponents/Home/Reviews'
+
+export {default as UsersReview} from './Reviews/UsersReview'
