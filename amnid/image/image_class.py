@@ -1,7 +1,6 @@
 import base64
 import secrets
 
-from flask import request
 from amnid.errors import ServerError
 
 from amnid.main import db

@@ -59,3 +59,6 @@ class UserSocialMediaResponse(BaseModel):
 
     class Config:
         orm_mode = True
+
+class UserIdParam(BaseModel):
+    user_id: str

@@ -4,7 +4,7 @@ from flask_pydantic import validate
 
 from amnid.utils import verify_user
 
-from .schema import CreateUsersParam, LoginUserResponseParam, UserEditInfoParam, UserInfoParam, UserInfoResponse, UserSocialMediaParam, UserSocialMediaResponse, UsersResponseParam, LoginUserParam
+from .schema import CreateUsersParam, LoginUserResponseParam, UserEditInfoParam, UserIdParam, UserInfoParam, UserInfoResponse, UserSocialMediaParam, UserSocialMediaResponse, UsersResponseParam, LoginUserParam
 from amnid.schema import SuccessResponse, ErrorResponse
 from .user_class import UserObj
 
@@ -41,6 +41,28 @@ def login(body: LoginUserParam):
 
     except Exception as e:
         return ErrorResponse(message=str(e)), 401
+
+@users.post('/get_social_media')
+@jwt_required()
+@validate()
+def get_social_media(body: UserIdParam):
+    verify = verify_user(get_jwt_identity(), body.user_id)
+    if verify: return verify
+
+    try:
+        user_obj = UserObj(user_id=body.user_id)
+        user = user_obj.get_user()
+
+        social_media = user.user_social_media
+
+        return SuccessResponse(
+                data = UserSocialMediaResponse(
+                    social_media = social_media
+                )
+            ), 200
+    
+    except Exception as e:
+        return ErrorResponse(message=str(e)), 400
 
 @users.post('/add_social_media')
 @jwt_required()

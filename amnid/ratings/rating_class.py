@@ -3,7 +3,6 @@ from amnid.errors import UserError
 from amnid.main import db
 from amnid.models import Rating
 from amnid.users.user_class import UserObj
-import math
 
 
 class Ratings:

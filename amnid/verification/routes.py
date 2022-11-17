@@ -5,7 +5,6 @@ from amnid.bank.bank_class import BankAccount
 from amnid.externals.identitypass import BVN
 from amnid.image.image_class import ImageObj
 from amnid.schema import ErrorResponse, SuccessResponse
-from amnid.users.user_class import UserObj
 
 from amnid.utils import verify_user
 from .verification_class import VerificationObj
