@@ -39,10 +39,11 @@ def search_vendor(body: SearchParam):
         data = {
             "first_name": find_vendor.first_name,
             "last_name": find_vendor.last_name,
-            "bank_name": "",
-            "account_number": "",
+            "bank_name": find_vendor.user_bank.bank_name,
+            "account_number": find_vendor.user_bank.account_number,
             "rate": vendor_rating['data']['rating'],
-            "rating_count": vendor_rating['data']['ratings_count']
+            "rating_count": vendor_rating['data']['ratings_count'],
+            "verified": find_vendor.verified
         }
 
         return SuccessResponse(

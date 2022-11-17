@@ -32,3 +32,9 @@ class UserSocialMediaObj(SocialMediaObj):
         self.user_id = user_id
         self.store_id = None
         self.social_media = social_media
+    
+
+def new_social_media(user_id):
+    new_social = SocialMedia(user_id = user_id)
+
+    db.session.add(new_social)

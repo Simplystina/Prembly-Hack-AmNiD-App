@@ -22,6 +22,9 @@ def rate_vendor(body: RatingParams):
     rating_obj = Ratings(user_id=body.user_id)
 
     try:
+        # Check if user is verified before he can rate a vendor
+        # Insert code here
+
         add_user_rating = rating_obj.rate_vendor(data=body.dict())
 
         rating = add_user_rating['data']

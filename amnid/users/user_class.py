@@ -1,6 +1,6 @@
 from flask import request
 
-from amnid.social_media.social_media_class import UserSocialMediaObj
+from amnid.social_media.social_media_class import UserSocialMediaObj, new_social_media
 from .schema import UserInfoParam
 from amnid.auth import create_token
 from amnid.main import db
@@ -74,10 +74,18 @@ class UserObj:
         new_user = User(user_id=self.user_id, first_name=self.first_name, last_name=self.last_name, email=self.email, password=hashed_password)
 
         db.session.add(new_user)
-        user_image = Image(user_id=new_user.user_id)
-        user_bank = Bank(user_id=new_user.user_id)
-        db.session.add(user_image)
-        db.session.add(user_bank)
+        
+        # Add user image
+        user_image = ImageObj(user_id=new_user.user_id)
+        user_image.post_image()
+
+        # Add user bank details
+        user_bank = BankAccount(user_id=new_user.user_id)
+        user_bank.post_bank_details()
+
+        # Add social media row for user
+        user_social_media = new_social_media(user_id=new_user.user_id)
+
         db.session.commit()
         db.session.refresh(new_user)
 
@@ -146,3 +154,6 @@ class UserObj:
         db.session.refresh(user)
 
         return {'status': True, 'message': 'Info updated!', 'data': user}
+
+from amnid.bank.bank_class import BankAccount
+from amnid.image.image_class import ImageObj

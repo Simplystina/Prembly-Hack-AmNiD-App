@@ -1,5 +1,6 @@
 
 from amnid.errors import UserError
+from amnid.models import Bank
 from amnid.users.user_class import UserObj
 
 from amnid.main import db
@@ -36,3 +37,8 @@ class BankAccount(UserObj):
         account_details.bank_id = details['bank_id']
 
         db.session.commit()
+    
+    def post_bank_details(self):
+        new_bank = Bank(user_id = self.user_id)
+
+        db.session.add(new_bank)
