@@ -75,7 +75,7 @@ def get_account_name(body: AccountNameParam):
         "bank_code": os.environ.get('DUMMY_BANK_CODE')
     }
 
-    url = 'api/v1/biometrics/merchant/data/verification/bank_account'
+    url = 'api/v1/biometrics/merchant/data/verification/bank_account/advance'
     connection = IdentityPass(url, payload=payload, method="POST")
 
     try:

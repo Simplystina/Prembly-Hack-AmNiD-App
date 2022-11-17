@@ -37,6 +37,7 @@ def search_vendor(body: SearchParam):
         vendor_rating = Ratings(user_id).get_total_rating()
         
         data = {
+            "vendor_id": find_vendor.user_id,
             "first_name": find_vendor.first_name,
             "last_name": find_vendor.last_name,
             "bank_name": find_vendor.user_bank.bank_name,
