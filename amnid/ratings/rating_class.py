@@ -13,6 +13,10 @@ class Ratings:
         self.userObj = UserObj(user_id=self.user_id)
         self.user = self.userObj.get_user()
     
+    def check_user_verified(self):
+        if self.user.verified == False:
+            raise UserError('You have to be verified to rate!')
+    
     def rate_vendor(self, **data):
         data = data['data']
 
