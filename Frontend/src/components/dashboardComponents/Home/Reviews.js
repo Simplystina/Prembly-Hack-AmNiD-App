@@ -3,7 +3,22 @@ import React from 'react'
 
 const Reviews = () => {
     const reviews = [
-        1, 2,3
+        {
+            id: 1,
+            num: 2,
+        },
+        {
+            id: 1,
+            num: 2
+        },
+        {
+            id: 1,
+            num: 2
+        },
+        {
+            id: 1,
+            num: 2
+        }
     ]
   return (
     <Box w="45%">
@@ -13,9 +28,9 @@ const Reviews = () => {
         </Flex>
         <VStack spacing={[4]}>
             {
-                reviews.map(()=>{
+                reviews.map((item)=>{
                     return (
-                        <Box bg="white" p="20px">
+                        <Box key={item.id} bg="white" p="20px">
                             <Flex justifyContent="space-between" pb="10px">
                                 <HStack>
                                     <Avatar/>

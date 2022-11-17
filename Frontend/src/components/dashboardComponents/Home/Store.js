@@ -4,7 +4,7 @@ import { Box, SimpleGrid, Text, Img ,Thead, Table,
     Tr,
     Th,
     Td,
-    TableCaption,
+    TableCaption, HStack,
     TableContainer,} from '@chakra-ui/react'
 import React,{useState, useEffect} from 'react'
 import {getAllStores} from "../../../../utils/services"

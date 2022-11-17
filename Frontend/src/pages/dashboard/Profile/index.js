@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import usersLayout from '../../../components/HOC/usersLayout'
 import {updateProfile} from "../../../../utils/services"
 
-const index = () => {
+const Index = () => {
  
        
   const [user, setUser] = useState({})
@@ -146,4 +146,4 @@ const index = () => {
   )
 }
 
-export default usersLayout(index)
+export default usersLayout(Index)

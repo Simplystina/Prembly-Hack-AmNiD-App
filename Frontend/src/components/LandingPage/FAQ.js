@@ -10,18 +10,22 @@ import React from 'react'
 
 const faq = [
     {
+        id: 1,
         title: "What Is AmNiD",
         content: ""
     },
     {
+        id: 2,
         title: "How do I verify a vendor on AmNiD ",
         content: ""
     },
     {
+        id: 3,
         title: "How do I verify a vendor on AmNiD",
         content: ""
     },
     {
+        id: 4,
         title: "How do I verify a vendor on AmNiD",
         content: ""
     },
@@ -35,7 +39,7 @@ const FAQ = () => {
             {
                 faq.map((item)=>{
                     return (
-                        <Box >
+                        <Box key={item.id}>
                             <AccordionItem  boxShadow="0px 4px 8px 0px rgba(0, 0, 0, 0.08)" borderRadius={6} m="3px 0" >
                                 <h2>
                                     <AccordionButton p="15px 20px">

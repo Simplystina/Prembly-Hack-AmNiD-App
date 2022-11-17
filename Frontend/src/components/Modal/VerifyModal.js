@@ -30,9 +30,7 @@ const VerifyModal = ({setDisplayVendor, vendor}) => {
     setDisplayVendor(false)
 
   }
-  useEffect(()=>{
-    console.log(vendor)
-  },[])
+
 
   const rateVendor = ()=>{
     setDisplayVendor(false)

@@ -13,7 +13,7 @@ import { TakePic } from '../../../components';
 
 
 
-const index = () => {
+const Index = () => {
 
   const videoConstraints = {
     width: 1280,
@@ -167,7 +167,7 @@ const index = () => {
                         {
                           banks?.map((bank)=>{
                             return (
-                              <option value={bank.bank_code}>{bank.name}</option>
+                              <option key={bank.bank_code} value={bank.bank_code}>{bank.name}</option>
                             )
                           })
                         }
@@ -232,4 +232,4 @@ const index = () => {
   )
 }
 
-export default usersLayout(index)
+export default usersLayout(Index)

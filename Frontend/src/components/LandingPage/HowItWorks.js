@@ -37,7 +37,7 @@ const HowItWorks = () => {
            {
             data.map((item)=>{
                return (
-                  <VStack boxShadow="0px 2px 0px 0px rgba(0, 133, 101, 1) 
+                  <VStack key={item.id} boxShadow="0px 2px 0px 0px rgba(0, 133, 101, 1) 
                   " spacing={4} alignItems="center" p="20px 10px"  borderBottomRadius={6}>
                      <Img w="60px" h="60px" src={item.img}/>
                         <Text mb="15px" color="#008565" fontWeight="600" fontSize="16px">{item.text}</Text>

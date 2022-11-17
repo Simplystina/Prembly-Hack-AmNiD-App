@@ -4,15 +4,30 @@ import React from 'react'
 const UsersReview = () => {
 
     const reviews = [
-        1, 2,3,4,5
+        {
+            id: 1,
+            num: 1
+        },
+        {
+            id: 2,
+            num: 2
+        },
+        {
+            id: 3,
+            num: 3
+        },
+        {
+            id: 4,
+            num: 4
+        }
     ]
   return (
     <Box m="30px 0">
         <VStack spacing={[4]}>
             {
-                reviews.map(()=>{
+                reviews.map((items)=>{
                     return (
-                        <Box bg="white" p="20px" pb="10px" borderRadius={6}>
+                        <Box key={items.id} bg="white" p="20px" pb="10px" borderRadius={6}>
                             <HStack align="flex-start">
                                   <Avatar w="50px" h="50px"/> 
                                    <Box>
