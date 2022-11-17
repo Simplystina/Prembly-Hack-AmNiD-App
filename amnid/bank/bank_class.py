@@ -34,7 +34,7 @@ class BankAccount(UserObj):
         account_details.account_number = details['account_number']
         account_details.account_name = details['account_name']
         account_details.bank_name = details['bank_name']
-        account_details.bank_id = details['bank_id']
+        account_details.bank_id = details['bank_code']
 
         db.session.commit()
     

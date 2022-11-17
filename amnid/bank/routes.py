@@ -37,7 +37,7 @@ def get_banks():
                 name = bank['name']
                 code = bank['code']
 
-                banks.append({'name': name, 'code': code})
+                banks.append({'name': name, 'bank_code': code})
 
             return banks, 200
         

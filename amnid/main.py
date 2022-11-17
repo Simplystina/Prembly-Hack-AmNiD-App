@@ -29,6 +29,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('SQLALCHEMY_DATABASE_URI') or 
 app.config['JWT_SECRET_KEY'] = os.getenv('SECRET_KEY')
 app.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(minutes=int(os.getenv('ACCESS_TOKEN_EXPIRE_MINUTES')))
 
+# Cache configuration
 app.config["CACHE_TYPE"] = "SimpleCache"
 app.config["CACHE_DEFAULT_TIMEOUT"] = 300
 cache = Cache(app)
@@ -41,6 +42,7 @@ from .users.routes import users
 from .ratings.routes import ratings
 from .search.routes import search
 from .bank.routes import banks
+from .verification.routes import verify
 
 # Register blueprints
 app.register_blueprint(users, url_prefix='/users')
@@ -48,6 +50,7 @@ app.register_blueprint(stores, url_prefix='/stores')
 app.register_blueprint(ratings, url_prefix='/ratings')
 app.register_blueprint(search, url_prefix='/search')
 app.register_blueprint(banks, url_prefix='/bank')
+app.register_blueprint(verify, url_prefix='/verify')
 
 from .models import *
 
