@@ -2,7 +2,7 @@ import axios from 'axios'
 import  Router  from 'next/router'
 
 const server = axios.create({
-  baseURL: 'https://amnid-production.up.railway.app/',
+  baseURL: 'https://amnid-api.herokuapp.com/',
   headers: {'Content-Type': 'application/json', 'Accept': 'application/json' },
 })
 
@@ -23,9 +23,10 @@ server.interceptors.response.use(
   },
   (err) => {
    
-    /*if (err.response && err.response.status === 401) {
+    if (err.response && err.response.status === 401) {
+      console.log(err, "errrrrrrrrr hereeeeeeeeeeee")
       localStorage.clear()
-    }*/
+    }
     return Promise.reject(err)
   },
 )
@@ -42,7 +43,7 @@ export const loginAndStoreToken = (token, user) => {
 
 export const logoutUser = ()=>{
   localStorage.removeItem("token");
-  localStorage.removeItem("user_id");
+  localStorage.removeItem("user");
 	
 	const prevPath = Router.pathname;
 	let redirectUrl = `/login?redirect=${prevPath}`;

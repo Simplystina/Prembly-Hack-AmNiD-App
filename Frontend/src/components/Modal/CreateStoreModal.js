@@ -112,8 +112,24 @@ const CreateStoreModal = () => {
             const data = await createStore(values)
             console.log(data, "dataa create store")
             clearInputs()
+            toast({
+                position: "top-right",
+                title: "store created successfully",
+                description: "store has been created",
+                 status: "success",
+                isClosable: true,
+              });
+              const closeModal = () => onClose()
+              closeModal()
         } catch (error) {
-            
+            console.log(error,"err")
+            toast({
+                position: "top-right",
+                title: "store creation failed",
+                description: error.response.data.message || "ensure details are unique",
+                 status: "error",
+                isClosable: true,
+              });
         }
     }
 

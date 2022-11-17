@@ -20,4 +20,7 @@ export {default as Store} from './dashboardComponents/Home/Store'
 
 export {default as Reviews} from './dashboardComponents/Home/Reviews'
 
-export {default as UsersReview} from './Reviews/UsersReview'
+export {default as UsersReview} from './ReviewsPageComponent/UsersReview'
+
+
+export {default as StoreTableComponent} from './StoresPageComponents/StoreTableComponent'

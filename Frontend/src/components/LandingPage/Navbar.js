@@ -12,9 +12,14 @@ const Navbar = () => {
             <Text fontWeight={600} fontSize="14px" color="#008565">FAQ</Text>
             
         </HStack>
-        <Link href="/signup">
+        <HStack>
+           <Link href="/login">
+            <Button _hover={{bg:"white", color:"#008565", border:"1px solid #008565"}} bg="#008565" color="white" fontSize="14px">Login</Button>
+            </Link>
+           <Link href="/signup">
             <Button _hover={{bg:"white", color:"#008565", border:"1px solid #008565"}} bg="#008565" color="white" fontSize="14px">Register</Button>
-        </Link>
+           </Link>
+        </HStack>
     </Flex>
   )
 }

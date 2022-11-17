@@ -1,16 +1,17 @@
-import { Avatar, Box , Button, HStack, Text, Flex, Input, VStack, Tabs, TabList, TabPanels, Tab, TabPanel} from '@chakra-ui/react'
+import { Avatar, Box , Button, HStack, Text, Flex, Input, VStack, Tabs, TabList, TabPanels, Tab, TabPanel, useToast} from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import usersLayout from '../../../components/HOC/usersLayout'
+import {updateProfile} from "../../../../utils/services"
 
 const index = () => {
  
        
   const [user, setUser] = useState({})
- 
+  const toast = useToast()
 
     const [firstName, setFirstName] = useState('')
     const [lastName, setLastName] = useState('')
-    const [password, setPassword] = useState('')
+    
     const [email, setEmail] = useState('')
     const [twitter, setTwitter] = useState('')
     const [facebook, setFacebook] = useState('')
@@ -19,10 +20,47 @@ const index = () => {
 
 
     const setDetails = (user)=>{
+      
       setFirstName(user?.first_name)
       setLastName(user?.last_name)
       setEmail(user?.email)
-      setPassword(user?.password)
+     
+    }
+
+    
+    const savChanges = async ()=>{
+
+      const user = JSON.parse(localStorage.getItem('user'))
+       
+    
+      const values = {
+        user_id : user.user_id,
+        first_name : firstName,
+        last_name: lastName,
+        email: email
+      }
+      
+    
+     try {
+       console.log(values,"valueeeeeeee")
+       const data = await updateProfile(values)
+       console.log(data, "dataaaaaaaa")
+       localStorage.setItem("user", JSON.stringify(values))
+       toast({
+        position: "top-right",
+        title: "User Info ",
+        description: "user Info updated successfully",
+         status: "success",
+        isClosable: true,
+      });
+     } catch (error) {
+      console.log(error)
+     }
+      
+    }
+
+    const saveSocial = ()=>{
+
     }
    useEffect(()=>{
     const userData = JSON.parse(localStorage.getItem('user'))
@@ -53,7 +91,7 @@ const index = () => {
            </Box >
            <TabList ml="250px">
              <Tab color="#008565" fontSize="14px" w="150px" h="36px" bg="white" fontWeight="400" variant='unstyled' _selected={{ color: 'white', bg: '#008565' , border:"1px solid #008565"}}> User Profile</Tab>
-             <Tab color="white" fontSize="14px" w="150px" h="36px" bg="#008565" fontWeight="400" variant='unstyled' border="1px solid white"  > Edit Socials</Tab>
+             <Tab color="white" fontSize="14px" w="150px" h="36px" bg="#008565" fontWeight="400" variant='unstyled' border="1px solid white"   _selected={{ color: 'white', bg: '#008565' }}> Edit Socials</Tab>
          </TabList>
          </Flex>
        </Box>
@@ -72,37 +110,38 @@ const index = () => {
                 <Text  w="20%" color="#747474" fontWeight="600" fontSize="18px">Email address</Text>
                 <Input w="50%" border="1px solid #ABAAAA" p="10px" variant='unstyled' placeholder='Email address' value={email} onChange={(e)=>setEmail(e.currentTarget.value)}/>
               </HStack>
-              <HStack w="100%" spacing="7" >
-                <Text  w="20%" color="#747474" fontWeight="600" fontSize="18px">Password</Text>
-                <Input value={password} onChange={(e)=>setPassword(e.currentTarget.value)} w="50%" border="1px solid #ABAAAA" p="10px" variant='unstyled' placeholder='Password'/>
-              </HStack>
+              
            </VStack>
+           <Flex justifyContent="center" mt="30px">
+                  <Button bg="#008565" color="white" fontSize="14px" w="300px" h="50px" onClick={savChanges}>Save Changes</Button>
+          </Flex>
           </TabPanel>
           <TabPanel>
              <VStack mt="80px" w="100%" spacing="7">
                <HStack w="100%" spacing="7" >
                   <Text  w="20%" color="#747474" fontWeight="600" fontSize="18px">Twitter</Text>
-                  <Input w="50%" border="1px solid #ABAAAA" p="10px" variant='unstyled' placeholder='Twitter'/>
+                  <Input w="50%" border="1px solid #ABAAAA" p="10px" variant='unstyled' placeholder='Twitter' value={twitter} onChange={(e)=>setTwitter(e.currentTarget.value)}/>
                 </HStack>
                 <HStack w="100%" spacing="7" >
                  <Text  w="20%" color="#747474" fontWeight="600" fontSize="18px">Tiktok</Text>
-                <Input w="50%" border="1px solid #ABAAAA" p="10px" variant='unstyled' placeholder='Tiktok'/>
+                <Input w="50%" border="1px solid #ABAAAA" p="10px" variant='unstyled' placeholder='Tiktok' value={tiktok} onChange={(e)=>setTiktok(e.currentTarget.value)}/>
               </HStack>
               <HStack w="100%" spacing="7" >
                 <Text  w="20%" color="#747474" fontWeight="600" fontSize="18px">Instagram</Text>
-                <Input w="50%" border="1px solid #ABAAAA" p="10px" variant='unstyled' placeholder='instagram'/>
+                <Input w="50%" border="1px solid #ABAAAA" p="10px" variant='unstyled' placeholder='instagram' value={instagram} onChange={(e)=>setInstagram(e.currentTarget.value)}/>
               </HStack>
               <HStack w="100%" spacing="7" >
                 <Text  w="20%" color="#747474" fontWeight="600" fontSize="18px">Facebook</Text>
-                <Input w="50%" border="1px solid #ABAAAA" p="10px" variant='unstyled' placeholder='faceboook'/>
+                <Input w="50%" border="1px solid #ABAAAA" p="10px" variant='unstyled' placeholder='faceboook' value={facebook} onChange={(e)=>setFacebook(e.currentTarget.value)}/>
                </HStack>
              </VStack>
+             <Flex justifyContent="center" mt="30px">
+               <Button bg="#008565" color="white" fontSize="14px" w="300px" h="50px" onClick={saveSocial}>Save Changes</Button>
+           </Flex>
           </TabPanel>
         </TabPanels>
       </Tabs>
-      <Flex justifyContent="center" mt="30px">
-        <Button bg="#008565" color="white" fontSize="14px" w="300px" h="50px">Save Changes</Button>
-      </Flex>
+      
     </Box>
   )
 }
