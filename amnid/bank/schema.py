@@ -15,5 +15,10 @@ class BankListResponse(BaseModel):
         orm_mode = True
 
 class AccountNameParam(BaseModel):
-    code: str
+    user_id: str
+    bank_code: str
+    number: str
+
+class AccountDetailsResponse(BaseModel):
     account_number: str
+    account_name: str

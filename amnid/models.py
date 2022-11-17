@@ -15,6 +15,7 @@ class User(db.Model):
     user_stores = db.relationship('Store', backref='user', lazy=True, cascade="all, delete")
     user_social_media = db.relationship('SocialMedia', backref='user', lazy=True, uselist=False, cascade="all, delete")
     ratings = db.relationship('Rating', backref='user', lazy=True, cascade="all, delete")
+    user_bank = db.relationship('Bank', backref='user', lazy=True, uselist=False, cascade="all, delete")
 
 class Image(db.Model):
     id = db.Column(db.Integer, primary_key= True, nullable=False)
@@ -45,3 +46,11 @@ class Rating(db.Model):
     comment = db.Column(db.Text)
     rater_name = db.Column(db.String, nullable=False)
     rater_image = db.Column(db.String, nullable=False)
+
+class Bank(db.Model):
+    id = db.Column(db.Integer, primary_key=True, nullable=False)
+    user_id = db.Column(db.String, db.ForeignKey('user.user_id'))
+    account_number = db.Column(db.String, server_default='Nil')
+    account_name = db.Column(db.String, server_default='Nil')
+    bank_name = db.Column(db.String, server_default='Nil')
+    bank_id = db.Column(db.String, server_default='000')

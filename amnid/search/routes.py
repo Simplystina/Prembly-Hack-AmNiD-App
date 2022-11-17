@@ -14,7 +14,7 @@ from .schema import SearchParam, SearchResponse
 
 search = Blueprint('search', __name__)
 
-@search.get('/search_vendor')
+@search.post('/search_vendor')
 @validate()
 def search_vendor(body: SearchParam):
     data = body.text.strip().upper()

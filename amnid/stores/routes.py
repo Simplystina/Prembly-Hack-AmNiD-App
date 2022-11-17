@@ -32,7 +32,7 @@ def create(body: CreateStoresParam):
     except Exception as e:
         return ErrorResponse(message=str(e)), 400
 
-@stores.get('/fetch_all')
+@stores.post('/fetch_all')
 @jwt_required()
 @validate()
 def fetch_all(body: FetchStoresParam):
@@ -55,7 +55,7 @@ def fetch_all(body: FetchStoresParam):
     except Exception as e:
         return ErrorResponse(message=str(e)), 400
 
-@stores.get('/fetch_one')
+@stores.post('/fetch_one')
 @validate()
 def fetch_one(body: FetchStoreParam):
     store_obj = StoreObj(user_id=0)

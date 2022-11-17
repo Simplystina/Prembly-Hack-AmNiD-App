@@ -41,7 +41,7 @@ def rate_vendor(body: RatingParams):
         return ErrorResponse(message=str(e)), 400
 
 
-@ratings.get('/get_ratings')
+@ratings.post('/get_ratings')
 @validate()
 def get_ratings(body: GetRatingsParam):
     rating_obj = Ratings(user_id=body.vendor_id)
@@ -59,7 +59,7 @@ def get_ratings(body: GetRatingsParam):
     except Exception as e:
         return ErrorResponse(message=str(e)), 400
 
-@ratings.get('/get_total_rating')
+@ratings.post('/get_total_rating')
 @validate()
 def get_total_rating(body: GetRatingsParam):
     rating_obj = Ratings(user_id=body.vendor_id)

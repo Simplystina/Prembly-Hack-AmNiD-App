@@ -4,7 +4,7 @@ from amnid.social_media.social_media_class import UserSocialMediaObj
 from .schema import UserInfoParam
 from amnid.auth import create_token
 from amnid.main import db
-from amnid.models import Image, User
+from amnid.models import Bank, Image, User
 from amnid.utils import verify_hashed_password, verify_params, hash_password, verify_secure_password
 from verify_email import verify_email
 from amnid.errors import ServerError, UserError
@@ -75,7 +75,9 @@ class UserObj:
 
         db.session.add(new_user)
         user_image = Image(user_id=new_user.user_id)
+        user_bank = Bank(user_id=new_user.user_id)
         db.session.add(user_image)
+        db.session.add(user_bank)
         db.session.commit()
         db.session.refresh(new_user)
 
