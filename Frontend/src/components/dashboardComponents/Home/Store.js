@@ -1,31 +1,85 @@
-import { Box, SimpleGrid, Text, Img } from '@chakra-ui/react'
-import React from 'react'
+import { Box, SimpleGrid, Text, Img ,Thead, Table,
+    Tbody,
+    Tfoot,
+    Tr,
+    Th,
+    Td,
+    TableCaption,
+    TableContainer,} from '@chakra-ui/react'
+import React,{useState, useEffect} from 'react'
+import {getAllStores} from "../../../../utils/services"
+import { AiFillFacebook, AiFillTwitterSquare, AiOutlineInstagram } from 'react-icons/ai'
+import {SiTiktok} from "react-icons/si"
+import {MdModeEdit, MdDelete} from "react-icons/md"
 
 const Store = () => {
 
-    const store = [
-        1,2
-    ]
+    const data = [1,2,3,4,5]
+    const [id, setId] = useState()
+    const [stores, setStores] = useState([])
+
+    const getStores = async ()=>{
+        const user = JSON.parse(localStorage.getItem('user'))
+       console.log(user.user_id, "iddddddddddd")
+       try {
+        const data = await getAllStores(user.user_id)
+        console.log(data.data.stores, "dattaaa")
+        setStores(data.data.stores)
+       } catch (error) {
+        console.log(error)
+       }
+    }
+
+   
+   
+    useEffect(()=>{
+        getStores()
+    },[])
   return (
-    <Box pb="50px" w="50%">
+    <Box pb="50px" w="50%"  borderRadius={6} m="20px 0" >
         <Text color="#ABAAAA" fontSize="20px" fontWeight={500}>Stores</Text>
-        <SimpleGrid columns={2} spacing={5}>
-            {
-                store.map(()=>{
-                    return(
-                        <Box borderRadius={6}>
-                            <Img w="100%" src="/images/store-img.png"/>
-                            <Box w="100%" p="30px 20px" bg="white">
-                                <Text fontSize="20px" fontWeight="600" color="#747474">J.k Home Appliances</Text>
-                                <Text fontSize="14px" fontWeight="500" color="#747474">
-                                Looking to modernize your home with dazzling looking appliances
-                                </Text>
-                            </Box>
-                        </Box>
-                    )
-                })
-            }
-        </SimpleGrid>
+        
+        <TableContainer variant="unstyled">
+            <Table variant="unstyled">
+                <Thead>
+                <Tr textTransform="capitalize" bg="white" borderRadius={6}>
+                    <Th textTransform="capitalize" fontSize="17px" color="#747474" fontWeight={500} >Store</Th>
+                    <Th fontWeight={500}  textTransform="capitalize" fontSize="16px" color="#747474">Description</Th>
+                    <Th fontWeight={500} textTransform="capitalize" fontSize="16px" color="#747474">Social</Th>
+                    <Th fontWeight={500}  textTransform="capitalize" fontSize="16px" color="#747474">Action</Th>
+                </Tr>
+               </Thead>
+               <Tbody>
+                  {
+                    stores.map((item)=>{
+                        return (
+                        <Tr key={item.id} bg="white" m="10px 0">
+                            <Td fontSize="16px" color="#747474" fontWeight="500">{item.name}</Td>
+                            <Td fontSize="16px" color="#747474" fontWeight="500">{item.description}</Td>
+                            <Td isNumeric>
+                                <HStack color="#008565">
+                                    <AiFillFacebook/>
+                                    <AiOutlineInstagram/>
+                                    <AiFillTwitterSquare/>
+                                    <SiTiktok/>
+                                </HStack>
+                            </Td>
+                            <Td>
+                                <HStack>
+                                    <Box color="green">
+                                       <MdModeEdit/>
+                                    </Box>
+                                    <Box color="red"><MdDelete/></Box>
+                                </HStack>
+                            </Td>
+                        </Tr>
+                        )
+                    })
+                  }
+            </Tbody>
+        </Table>
+        </TableContainer>
+   
     </Box>
   )
 }

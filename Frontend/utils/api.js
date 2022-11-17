@@ -2,7 +2,7 @@ import axios from 'axios'
 import  Router  from 'next/router'
 
 const server = axios.create({
-  baseURL: 'https://amnid-api.herokuapp.com/',
+  baseURL: 'https://amnid-production.up.railway.app/',
   headers: {'Content-Type': 'application/json', 'Accept': 'application/json' },
 })
 

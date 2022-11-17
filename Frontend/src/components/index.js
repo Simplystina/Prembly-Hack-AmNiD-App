@@ -24,3 +24,5 @@ export {default as UsersReview} from './ReviewsPageComponent/UsersReview'
 
 
 export {default as StoreTableComponent} from './StoresPageComponents/StoreTableComponent'
+
+export {default as TakePic} from './TakePic'

@@ -1,5 +1,5 @@
 import { Box, Input, Text, VStack, Select, Stack, Button, Flex, useToast } from '@chakra-ui/react'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useFormik } from 'formik';
  import * as Yup from 'yup';
  import Link from 'next/link'
@@ -11,9 +11,14 @@ import { useFormik } from 'formik';
 
 const LoginForm = () => {
 
+  const router = useRouter()
+  const ratings = router?.query?.rating
+  
+  console.log(router.query)
+
 
     const toast = useToast()
-    const router = useRouter()
+    
 
     const formik = useFormik({
         initialValues: {
@@ -22,7 +27,7 @@ const LoginForm = () => {
         
         },
         validationSchema: Yup.object({
-		email: Yup.string().email().required("email is required"),
+		    email: Yup.string().email().required("email is required"),
         password: Yup.string().required("password is required"),
 
         }),
@@ -45,7 +50,16 @@ const LoginForm = () => {
                 status: "success",
                 isClosable: true,
               });
-
+               if(ratings){
+                
+                
+                router.push({
+                  pathname:'/'
+                , query: { homePage: 'true' }}
+                , '/'); 
+                resetForm();
+                return
+               }
               const { redirect: redirectUrl = "/dashboard/home" } =
                 router.query;
               router.push(redirectUrl);

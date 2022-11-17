@@ -30,3 +30,21 @@ export const searchAVendor = async(search_word)=>{
 	const res = await axios.post('search/search_vendor', { text: search_word } )
 	return res
 }
+export const rateAVendor = async(values)=>{
+	
+	const res = await axios.post('ratings/rate_vendor', values )
+	return res
+}
+export const getBankList = async()=>{
+	const res = await axios.get('bank/get_banks')
+	return res
+}
+export const getAccountName = async(values)=>{
+	const res = await axios.post('bank/get_account_name', values )
+	return res
+}
+
+export const verify = async(values)=>{
+	const res = await axios.post('verify/verify_account', values)
+	return res
+}

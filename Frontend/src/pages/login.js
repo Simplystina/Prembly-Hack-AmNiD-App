@@ -1,9 +1,12 @@
-import React from 'react'
+import React,{useEffect} from 'react'
 import { LoginForm } from '../components'
 import Head from 'next/head'
 import AuthRegistration from '../components/HOC/AuthRegistration'
 
+
 const login = () => {
+    
+
   return (
     <>
     <Head>

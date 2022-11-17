@@ -7,14 +7,12 @@ import { Box,Modal,
     ModalCloseButton,
     useDisclosure,
     Button, 
-    Lorem, 
-    Img, 
+    
     Flex,
     Text,
-    Heading,
-    VStack,
+   
     HStack,
-    IconButton,
+    
     Input,
     Textarea,} from '@chakra-ui/react'
 import React,{useRef, useState} from 'react'
@@ -57,10 +55,8 @@ const RatingModal = () => {
   return (
    <Box >
       
-       <Button bg="#008565" w="100%" color="white" onClick={onOpen}>
-             Rate this Vendor
-        </Button>
-      <Modal w="plenty" finalFocusRef={finalRef} isOpen={isOpen} onClose={onClose}>
+      
+      <Modal finalFocusRef={finalRef} isOpen={onOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader></ModalHeader>
