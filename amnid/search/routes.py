@@ -1,4 +1,4 @@
-from flask import Blueprint
+from flask import Blueprint, request
 from flask_pydantic import validate
 from sqlalchemy import func
 from amnid.errors import UserError
@@ -44,7 +44,8 @@ def search_vendor(body: SearchParam):
             "account_number": find_vendor.user_bank.account_number,
             "rate": vendor_rating['data']['rating'],
             "rating_count": vendor_rating['data']['ratings_count'],
-            "verified": find_vendor.verified
+            "verified": find_vendor.verified,
+            "vendor_image": request.host_url + f"static/img/{find_vendor.user_image.img_string}"
         }
 
         return SuccessResponse(
