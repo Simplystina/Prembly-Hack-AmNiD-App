@@ -36,13 +36,14 @@ const VerifyModal = ({setDisplayVendor, vendor}) => {
     setDisplayVendor(false)
     const token = localStorage.getItem('token')
     if(!token){
-      
       router.push({
         pathname:'/login'
       , query: { rating: 'true' }}
       , '/login');  
+      localStorage.setItem("vendor_id", vendor.vendor_id);
       return
     }
+    console.log("navigated to homePage")
     router.push({
       pathname:'/'
     , query: { homePage: 'true' }}
@@ -79,7 +80,7 @@ const VerifyModal = ({setDisplayVendor, vendor}) => {
                             <Text fontSize="18px" color="#747474" fontWeight={600}>Bank Name:</Text>
                         </VStack>
                         <VStack spacing={4}>
-                            <Text fontSize="18px" color="#747474" fontWeight={600}> {vendor.first_name + vendor.last_name}</Text>
+                            <Text fontSize="18px" color="#747474" fontWeight={600}> {vendor.first_name + " "+ vendor.last_name}</Text>
                             <Text fontSize="18px" color="#747474" fontWeight={600}> {vendor.account_number}</Text>
                             <Text fontSize="18px" color="#747474" fontWeight={600}>{vendor.bank_name}</Text>
                         </VStack>

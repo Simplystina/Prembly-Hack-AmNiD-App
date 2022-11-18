@@ -31,17 +31,17 @@ const data = [
 ]
 const HowItWorks = () => {
   return (
-    <Box p="30px 60px" w="100%" >
-        <Text color="#2E2E2E" fontWeight="600" fontSize="26px" textAlign="center">How it Works</Text>
-        <SimpleGrid columns={[4]} mt="30px" spacing={4}>
+    <Box p={["20px 30px","20px 40px","30px 60px"]}  w="100%" >
+        <Text color="#2E2E2E" fontWeight="600" fontSize={["20px","24px","26px"]} textAlign="center">How it Works</Text>
+        <SimpleGrid columns={[1,2,3,4]} mt="30px" spacing={4}>
            {
             data.map((item)=>{
                return (
                   <VStack key={item.id} boxShadow="0px 2px 0px 0px rgba(0, 133, 101, 1) 
                   " spacing={4} alignItems="center" p="20px 10px"  borderBottomRadius={6}>
-                     <Img w="60px" h="60px" src={item.img}/>
-                        <Text mb="15px" color="#008565" fontWeight="600" fontSize="16px">{item.text}</Text>
-                        <Text maxW="500px" textAlign="center" color="#2E2E2E" fontWeight={500} fontSize="14px" lineHeight="17px">{item.content}</Text>
+                     <Img w={["30px","40px","60px"]} h={["30px","40px","60px"]} src={item.img}/>
+                        <Text mb="15px" color="#008565" fontWeight="600" fontSize={["12px","14px","16px"]}>{item.text}</Text>
+                        <Text maxW="500px" textAlign="center" color="#2E2E2E" fontWeight={500} fontSize={["12px","14px"]} lineHeight="17px">{item.content}</Text>
                   </VStack>
            
                )

@@ -48,3 +48,8 @@ export const verify = async(values)=>{
 	const res = await axios.post('verify/verify_account', values)
 	return res
 }
+
+export const getRatings = async(values)=>{
+	const res = await axios.post('ratings/get_ratings',values)
+	return res
+}

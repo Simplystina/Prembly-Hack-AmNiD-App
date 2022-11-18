@@ -53,7 +53,7 @@ const Store = () => {
                   {
                     stores.map((item)=>{
                         return (
-                        <Tr key={item.id} bg="white" m="10px 0">
+                        <Tr key={item.id} bg="white" m="20px 0">
                             <Td fontSize="16px" color="#747474" fontWeight="500">{item.name}</Td>
                             <Td fontSize="16px" color="#747474" fontWeight="500">{item.description}</Td>
                             <Td isNumeric>

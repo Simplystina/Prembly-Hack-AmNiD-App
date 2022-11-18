@@ -1,4 +1,4 @@
-import { Box, HStack, Text , VStack, Stack, useToast, Input, Button, Img, Select} from '@chakra-ui/react'
+import { Box, HStack, Text , VStack, Stack, useToast, Input, Button, Img, Select, Flex} from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import usersLayout from '../../../components/HOC/usersLayout'
 import { useFormik } from 'formik';
@@ -43,7 +43,15 @@ const Index = () => {
   
     const [account, setAccount] = useState('')
     const [filled, setFilled] = useState(false)
+    const [verified, setVerified] = useState(false)
     
+
+
+    useEffect(()=>{
+      const user = JSON.parse(localStorage.getItem('user'))
+      console.log(user.verified, "userrrrrrrrrrrr")
+      setVerified(user.verified)
+    },[])
 
     const getbanks = async()=>{
       const  data = await getBankList()
@@ -130,7 +138,7 @@ const Index = () => {
            <Text color="#747474" fontSize="18px" fontWeight="600">-Verification</Text>
         </HStack>
         <Text pt="5px" color="#747474" fontSize="16px" fontWeight="600">Vendor Verification</Text>
-        <Box m="40px ">
+       { !verified? <Box m="40px ">
         <form onSubmit={formik.handleSubmit}>
                                 
             <Stack w="70%" spacing="4">
@@ -227,7 +235,11 @@ const Index = () => {
 
                                 
         </form>
-        </Box>
+        </Box> :
+        <Flex justifyContent="center" >
+           <Img w="300px" h="300px" src="/images/verified_user.png" borderRadius="50%"/>
+        </Flex>
+      }
     </Box>
   )
 }

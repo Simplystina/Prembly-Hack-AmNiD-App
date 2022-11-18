@@ -89,6 +89,13 @@ const CustomRatingModal = () => {
 
        } catch (error) {
            console.log(error, "error")
+           toast({ 
+            position: "top-right",
+            title: "Error rating vendor",
+            description: error.response.data.message || "Error occurred while trying to rate",
+            status: "error",
+            isClosable: true,
+          });
        }
   }
 
@@ -140,7 +147,7 @@ const closeModal =()=> {
                             <Textarea h="140px" _placeholder={{fontSize:"12px"}} placeholder='Input your text' value={review}  onChange={handleInputChange}/>
                         </Box>
                         
-                          <Button mt="35px" fontSize="13px" bg="#008565" w="100%" color="white" onClick={submitComment}>Submit Review</Button>
+                          <Button mt="35px" fontSize="13px" bg="#008565" w="100%" color="white" onClick={submitComment} _hover={{color:"#008565", bg:"none"}}>Submit Review</Button>
                         </Box>  
                     </Flex>
                  </div>

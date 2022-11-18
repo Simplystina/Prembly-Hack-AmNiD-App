@@ -175,7 +175,7 @@ const CreateStoreModal = () => {
                         <Input placeholder='Enter your name' _placeholder={{fontSize:"12px"}}  onChange={(e)=>setTiktok(e.currentTarget.value)}/>
                     </Box>
                     
-                    <Button mt="15px" fontSize="13px" bg="#008565" w="100%" color="white" onClick={submit}>Submit Review</Button>
+                    <Button mt="15px" fontSize="13px" bg="#008565" w="100%" color="white" onClick={submit}>Submit</Button>
                 </Box>  
            
           </ModalBody>

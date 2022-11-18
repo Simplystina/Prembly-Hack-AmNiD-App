@@ -98,7 +98,7 @@ const RatingModal = () => {
                         <Text pb="10px" color="#000000" fontWeight={600} fontSize="14px" >Your Name</Text>
                         <Input placeholder='Enter your name' _placeholder={{fontSize:"12px"}}/>
                     </Box>
-                    <Button mt="35px" fontSize="13px" bg="#008565" w="100%" color="white">Submit Review</Button>
+                    <Button mt="35px" fontSize="13px" bg="#008565" w="100%" color="white" _hover={{color:"#008565"}}>Submit Review</Button>
                 </Box>  
            </Flex>
           </ModalBody>

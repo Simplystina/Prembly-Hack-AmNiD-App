@@ -1,5 +1,6 @@
 import { Box, Text, VStack, Avatar, Flex, HStack } from '@chakra-ui/react'
-import React from 'react'
+import React,{useEffect, useState} from 'react'
+import {getRatings} from "../../../utils/services"
 
 const UsersReview = () => {
 
@@ -21,6 +22,23 @@ const UsersReview = () => {
             num: 4
         }
     ]
+
+    const [data, setData] = useState([])
+
+    
+    const Reviews = async ()=>{
+        const user = JSON.parse(localStorage.getItem('user'))
+        console.log(user, "userrrrrrrrrrrr")
+        const values = {
+            vendor_id : user.user_id
+        }
+        const data = await getRatings(values)
+        console.log(data,"reviews dataa")
+        setData(data.data.data)
+    }
+    useEffect(()=>{
+        Reviews()
+    },[])
   return (
     <Box m="30px 0">
         <VStack spacing={[4]}>
