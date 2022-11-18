@@ -15,3 +15,6 @@ class UserVerificationParams(BaseModel):
 
     class Config:
         orm_mode = True
+
+class GetVerifiedParams(BaseModel):
+    user_id: str
