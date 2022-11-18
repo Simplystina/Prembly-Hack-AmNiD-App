@@ -15,3 +15,6 @@ pip install -r requirements.txt
 
 ## API Documentation
 Use the link [AMNID_API](https://documenter.getpostman.com/view/16553335/2s8YYHMPFv) to view the full documentation for endpoints.
+
+## System Architecture
+Use the link [System_Architecture](https://drive.google.com/drive/folders/1OgXTeH-HfS1kwcJDAi0vmdDqemQyHauW?usp=share_link)
