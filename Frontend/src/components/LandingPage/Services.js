@@ -24,15 +24,15 @@ const services =[
 ]
 const Services = () => {
   return (
-    <Box  p={["20px 30px","20px 40px","30px 60px"]} w="100%" >
+    <Box  p={["20px 20px","20px 40px","30px 60px"]} w="100%" >
 
         <Text color="#2E2E2E" fontWeight="600" fontSize={["17px","20px","26px"]} textAlign="center">Our Services</Text>
-        <SimpleGrid columns={[1,2,3]} mt="30px" spacing={4}>
+        <SimpleGrid columns={[1,2,3]} mt={["20px","30px"]} spacing={4}>
            {
             services.map((item)=>{
                return (
-                  <Stack direction={['column',null, 'row']} key={item.id} boxShadow="0px 4px 10px 0px rgba(0, 0, 0, 0.1)" p="20px 20px 30px 20px" spacing={4} alignItems="flex-start">
-                      <Flex justifyContent={["center", null, "flex-start"]}>
+                  <Stack direction={['column',null, 'row']} key={item.id} boxShadow="0px 4px 10px 0px rgba(0, 0, 0, 0.1)" p={["10px 10px 10px 10px","20px 20px 30px 20px"]} spacing={4} alignItems="flex-start">
+                      <Flex  justifyContent={["center", null, "flex-start"]}>
                          <Img w="60px" h="60px" src={item.img}/>
                       </Flex>
                      <Box maxW="200px">

@@ -31,7 +31,7 @@ const data = [
 ]
 const HowItWorks = () => {
   return (
-    <Box p={["20px 30px","20px 40px","30px 60px"]}  w="100%" >
+    <Box p={["20px 20px","20px 40px","30px 60px"]}  w="100%" >
         <Text color="#2E2E2E" fontWeight="600" fontSize={["20px","24px","26px"]} textAlign="center">How it Works</Text>
         <SimpleGrid columns={[1,2,3,4]} mt="30px" spacing={4}>
            {

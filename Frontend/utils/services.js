@@ -53,3 +53,8 @@ export const getRatings = async(values)=>{
 	const res = await axios.post('ratings/get_ratings',values)
 	return res
 }
+
+export const getUser = async(values)=>{
+	const res = await axios.post('ratings/get_ratings',values)
+	return res
+}

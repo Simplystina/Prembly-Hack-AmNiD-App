@@ -5,7 +5,7 @@ const Footer = () => {
   return (
    <Box bg="#008565" p={["10px",null,"30px"]}>
     <Flex justifyContent="center">
-        <Stack direction={["row","column"]} justify="space-between" w={["90%","70%"]}>
+        <Stack direction={["column","row","row"]} justify="space-between" w={["90%","70%"]}>
            <Text color="#FFFFFF" fontWeight="600" fontSize={["20px" ,"26px" ,"32px"]} lineHeight="34px">LETS GET YOU STARTED</Text>
            <Button bg="white" w={["150px","200px","302px"]} h={["40px","40px","56px"]} borderRadius={6} color="#008565">Register Now</Button>
         </Stack>
