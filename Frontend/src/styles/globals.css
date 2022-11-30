@@ -7,7 +7,8 @@ body {
   padding: 0;
   margin: 0;
   font-family: Inter !important;
-
+  max-width: 100% !important;
+  overflow-x: hidden !important;
 }
 
 a {

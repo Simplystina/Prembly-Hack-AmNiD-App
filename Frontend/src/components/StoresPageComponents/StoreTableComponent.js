@@ -43,10 +43,10 @@ const StoreTableComponent = () => {
             <Table variant="unstyled">
                 <Thead>
                     <Tr textTransform="capitalize">
-                    <Th textTransform="capitalize" fontSize="17px" color="#747474" fontWeight={500} >Store Name</Th>
-                    <Th fontWeight={500}  textTransform="capitalize" fontSize="16px" color="#747474">Description</Th>
-                    <Th fontWeight={500} textTransform="capitalize" fontSize="16px" color="#747474">Social</Th>
-                    <Th fontWeight={500}  textTransform="capitalize" fontSize="16px" color="#747474">Action</Th>
+                    <Th textTransform="capitalize" fontSize={["14px","16px"]} color="#747474" fontWeight={500} >Store Name</Th>
+                    <Th fontWeight={500}  textTransform="capitalize" fontSize={["14px","16px"]} color="#747474">Description</Th>
+                    <Th fontWeight={500} textTransform="capitalize" fontSize={["14px","16px"]} color="#747474">Social</Th>
+                    <Th fontWeight={500}  textTransform="capitalize" fontSize={["14px","16px"]} color="#747474">Action</Th>
                 </Tr>
                </Thead>
                <Tbody>

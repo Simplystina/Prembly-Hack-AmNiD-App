@@ -76,10 +76,10 @@ const RegistrationForm = () => {
       });
 
   return (
-    <Box p="20px">
+    <Box p={["10px","20px"]}>
         <Text fontWeight={600} fontSize="16px" color="#008767" textAlign="right">Need Any Help?</Text>
 
-        <Box m="40px 80px">
+        <Box m={["20px 20px","20px 40px","40px 80px"]}>
         <form onSubmit={formik.handleSubmit}>
                                 
             <Stack w="full" spacing="4">

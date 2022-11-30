@@ -4,18 +4,20 @@ import DashboardMenu from './DashboardMenu'
 import {FiLogOut} from "react-icons/fi"
 import { logoutUser } from '../../../utils/api'
 import { useRouter } from 'next/router'
+import DashboardSidebar from './DashboardSidebar'
 
 const DasboardLayout = ({children}) => {
 
 	
   return (
-    <Flex w="full" minH="100vh">
-			<Box
+    <Flex  w="full" overflow="hidden">
+			<Box 
+			   
 				w="56"
 				borderRightWidth="thin"
 				borderColor="gray.100"
 				display={["none", "none", "block"]}
-				flexShrink="0"
+				flexShrink="1"
 				h="100vh"
 				position="sticky"
 				top="0"
@@ -30,20 +32,32 @@ const DasboardLayout = ({children}) => {
                     </HStack>
                 </Flex>
 			</Box>
-			<Flex flex="1" w="full" flexDir="column" bg="#F7F7F7">
-				<Flex justify="flex-end" p="20px">
-                    <Avatar/>
+
+			<Flex  minWidth="0"
+					 minH="0"
+					 overflowX="hidden" flexDir="column" bg="#F7F7F7" flex="1">
+			
+				<Flex w="100%" justifyContent="space-between" display={["flex","flex","none"]}>
+					<DashboardSidebar/>
+				    <Flex justify="flex-end" p="20px">
+                        <Avatar/>
+                     <Box>
+                        <Text color="#2E2E2E" fontWeight={600} fontSize="16px">J.K Stores</Text>
+                        <Text color="#747474" fontWeight={500} fontSize="14px">John Kennedy</Text>
+                     </Box>
+                    </Flex>
+				</Flex>
+				<Flex justify="flex-end" p="20px" display={["none", "none", "flex"]}>
+                        <Avatar/>
                      <Box>
                         <Text color="#2E2E2E" fontWeight={600} fontSize="16px">J.K Stores</Text>
                         <Text color="#747474" fontWeight={500} fontSize="14px">John Kennedy</Text>
                      </Box>
                 </Flex>
-				{/* <Container maxW="sm" bg="white" shadow="md" rounded="md" position="relative"> */}
+				
 				<Box
-					px={["2", "2", "4"]}
-					h="full"
-					
-					w="full"
+				    
+					px={["4", "4", "4"]}
 					bg="#f3f5f7"
 				>
 					{children}

@@ -21,12 +21,12 @@ const Reviews = () => {
         }
     ]
   return (
-    <Box w="45%">
+    <Box w={["100%","100%","45%"]}>
         <Flex justifyContent="space-between">
-            <Text color="#ABAAAA" fontSize="20px" fontWeight={500}>Reviews</Text>
-            <Text color="#008565" fontSize="15px" fontWeight={500}>All Reviews</Text>
+            <Text color="#ABAAAA" fontSize={["16px","20px"]} fontWeight={500}>Reviews</Text>
+            <Text color="#008565" fontSize={["13px","15px"]} fontWeight={500}>All Reviews</Text>
         </Flex>
-        <VStack spacing={[4]}>
+        <VStack spacing={[[2,4]]}>
             {
                 reviews.map((item)=>{
                     return (

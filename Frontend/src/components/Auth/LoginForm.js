@@ -87,10 +87,10 @@ const LoginForm = () => {
       });
 
   return (
-    <Box p="20px">
+    <Box p={["10px","20px"]}>
         <Text fontWeight={600} fontSize="16px" color="#008767" textAlign="right">Need Any Help?</Text>
 
-        <Box m="40px 80px">
+        <Box m={["20px 20px","20px 40px","40px 80px"]}>
         <form onSubmit={formik.handleSubmit}>
                                 
             <Stack w="full" spacing="4">
@@ -137,7 +137,7 @@ const LoginForm = () => {
                   type='submit'
                   > Login
                     </Button>   
-                    <Text fontSize="16px" fontWeight={500} color="rgba(0, 0, 0, 1)" p="10px 0" textAlign="center">
+                    <Text fontSize={["14px","16px"]} fontWeight={500} color="rgba(0, 0, 0, 1)" p="10px 0" textAlign="center">
                     Are You New To AMniD? <Link href="/signup">
                     <span style={{color:"rgba(0, 133, 101, 1)", fontWeight:"700"}}>SignUp</span></Link>
                   </Text>         

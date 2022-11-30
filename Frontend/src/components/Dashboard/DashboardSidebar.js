@@ -6,8 +6,12 @@ import { Box,
     DrawerOverlay,
     DrawerContent,
     DrawerCloseButton, 
-    useDisclosure, Button, Input} from '@chakra-ui/react'
+    useDisclosure, Button, Input, Text, HStack, Flex, Center} from '@chakra-ui/react'
 import React from 'react'
+import DashboardMenu from './DashboardMenu'
+import { FiLogOut } from 'react-icons/fi'
+import { logoutUser } from '../../../utils/api'
+import { HamburgerIcon } from '@chakra-ui/icons'
 
 
 
@@ -17,28 +21,29 @@ const DashboardSidebar = () => {
 
   return (
     <>
-     <Button colorScheme='teal' onClick={onOpen}>
-        Open
-      </Button>
+     <Flex cursor="pointer" justifyContent="center" alignItems="center" bg="#008565" color="white" fontSize={20}  m="10px " h="30px" w="30px" borderRadius={5} onClick={onOpen} display={["block","block","none"]} >
+          <Center><Box><HamburgerIcon m="0 auto"/></Box></Center>
+      </Flex>
+      
       <Drawer
         isOpen={isOpen}
-        placement='right'
+        placement='left'
         onClose={onClose}
       >
         <DrawerOverlay />
         <DrawerContent>
           <DrawerCloseButton />
-          <DrawerHeader>Create your account</DrawerHeader>
+          <DrawerHeader><Text pb="20px" fontWeight={600} fontSize="35px" color="#008565" >AmNiD</Text></DrawerHeader>
 
           <DrawerBody>
-            <Input placeholder='Type here...' />
+            <DashboardMenu/>
           </DrawerBody>
 
           <DrawerFooter>
-            <Button variant='outline' mr={3} onClick={onClose}>
-              Cancel
-            </Button>
-            <Button colorScheme='blue'>Save</Button>
+              <HStack color="#FC5656">
+                <FiLogOut/>
+                <Text cursor="pointer" fontWeight="600" fontSize="14px" color="#FC5656" onClick={logoutUser}>Logout</Text>
+              </HStack>
           </DrawerFooter>
         </DrawerContent>
       </Drawer>

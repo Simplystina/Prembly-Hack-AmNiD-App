@@ -134,20 +134,20 @@ const Index = () => {
   return (
     <Box>
         <HStack>
-           <Text color="#747474" fontSize="25px" fontWeight="500">Dashboard</Text>
-           <Text color="#747474" fontSize="18px" fontWeight="600">-Verification</Text>
+           <Text color="#747474" fontSize={["20px","25px"]} fontWeight="500">Dashboard</Text>
+           <Text color="#747474" fontSize={["14px","16px","18px"]} fontWeight="600">-Verification</Text>
         </HStack>
-        <Text pt="5px" color="#747474" fontSize="16px" fontWeight="600">Vendor Verification</Text>
-       { !verified? <Box m="40px ">
+        <Text pt="5px" color="#747474" fontSize={["14px","16px"]} fontWeight="600">Vendor Verification</Text>
+       { !verified? <Box m={["20px 10px","20px","40px"]}>
         <form onSubmit={formik.handleSubmit}>
                                 
-            <Stack w="70%" spacing="4">
+            <Stack w={["100%",null,"70%"]} spacing={[2,4]}>
                 
                
-                 <HStack align="baseline">
-                    <Text w="20%" fontWeight="700" fontSize={["12px","14px"]} color="#747474">Account Number</Text>
+                 <Stack direction={["column","row","row"]} align="baseline">
+                    <Text w={["100%","20%"]} fontWeight="700" fontSize={["12px","14px"]} color="#747474">Account Number</Text>
                     <Input 
-                        w="70%"
+                        w={["100%","70%"]}
                          p="25px"
                         name="account_number" type="text"
                         placeholder="Enter your account number" 
@@ -159,11 +159,11 @@ const Index = () => {
                         {formik.touched.account_number && formik.errors.account_number ? (
                         <Text fontWeight="500" fontSize="10px" color="red">{formik.errors.account_number}</Text>
                         ) : null}
-                 </HStack>
-                 <HStack align="baseline">
-                    <Text w="20%" fontWeight="700" fontSize={["12px","14px"]} color="#747474">Bank Name</Text>
+                 </Stack>
+                 <Stack direction={["column","row","row"]} align="baseline">
+                    <Text w={["100%","20%"]} fontWeight="700" fontSize={["12px","14px"]} color="#747474">Bank Name</Text>
                     <Select 
-                        w="70%"
+                        w={["100%","70%"]}
                          p="25px"
                          type="text"
                         placeholder="Enter your bank name" 
@@ -183,12 +183,12 @@ const Index = () => {
                         {formik.touched.bank_code && formik.errors.bank_code ? (
                         <Text fontWeight="500" fontSize="10px" color="red">{formik.errors.bank_code}</Text>
                         ) : null}
-                 </HStack>
+                 </Stack>
                  
-                 <HStack align="baseline">
-                    <Text w="20%" fontWeight="700" fontSize={["12px","14px"]} color="#747474">BVN</Text>
+                 <Stack  direction={["column","row","row"]} align="baseline">
+                    <Text w={["100%","20%"]} fontWeight="700" fontSize={["12px","14px"]} color="#747474">BVN</Text>
                     <Input 
-                        w="70%"
+                        w={["100%","70%"]}
                          p="25px"
                         name="bvn" type="text"
                         placeholder="Enter your bank name" 
@@ -200,7 +200,7 @@ const Index = () => {
                         {formik.touched.bvn && formik.errors.bvn ? (
                         <Text fontWeight="500" fontSize="10px" color="red">{formik.errors.bvn}</Text>
                         ) : null}
-                 </HStack>
+                 </Stack>
                  
                  
                   
@@ -214,12 +214,12 @@ const Index = () => {
                      />
                         <HStack onClick={capture} cursor="pointer">
                           <Img src="/icons/face-capture.png"/>
-                             <Text  fontSize="20px" fontWeight={600} color="rgba(0, 133, 101, 1)" p="10px 0">
+                             <Text  fontSize={["16px","18px","20px"]} fontWeight={600} color="rgba(0, 133, 101, 1)" p="10px 0">
                                Face Capture
                             </Text>
                           </HStack>
                         
-                  <Text fontSize="14px" fontWeight={400} color="rgba(0, 0, 0, 1)" p="10px 0" >
+                  <Text fontSize={["12px","14px"]} fontWeight={400} color="rgba(0, 0, 0, 1)" p="10px 0" >
                     By checking this box you agree to <Link href="/signup">
                     <span style={{color:"rgba(0, 133, 101, 1)", fontWeight:"700"}}>AMnid Terms and Conditions</span></Link>
                   </Text>      
@@ -237,7 +237,7 @@ const Index = () => {
         </form>
         </Box> :
         <Flex justifyContent="center" >
-           <Img w="300px" h="300px" src="/images/verified_user.png" borderRadius="50%"/>
+           <Img w={["400px","300px"]} h={["400px","300px"]} src="/images/verified_user.png" borderRadius="50%"/>
         </Flex>
       }
     </Box>
