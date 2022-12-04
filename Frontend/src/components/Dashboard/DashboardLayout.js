@@ -10,9 +10,8 @@ const DasboardLayout = ({children}) => {
 
 	
   return (
-    <Flex  w="full" overflow="hidden">
+    <Flex  w="full" >
 			<Box 
-			   
 				w="56"
 				borderRightWidth="thin"
 				borderColor="gray.100"

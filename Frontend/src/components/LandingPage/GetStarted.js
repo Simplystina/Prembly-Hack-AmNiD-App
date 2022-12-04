@@ -3,7 +3,7 @@ import React from 'react'
 
 const GetStarted = () => {
   return (
-    <Box p={["20px 20px","20px 40px","30px 60px"]}  w="100%" >
+    <Box id="getstarted" p={["20px 20px","20px 40px","30px 60px"]}  w="100%" >
         <Center mb={["20px","30px"]}>
             <Button color="white"     fontSize={[12,14]}    bg="#008565" h={["32px","32px","52px"]} w={["150px","200px","300px"]}borderRadius={6}>Get Started
             </Button>

@@ -24,6 +24,22 @@ export const getAllStores = async(id) =>{
 	const res = await axios.post('stores/fetch_all', { user_id: id } )
 	return res
 }
+export const updateAStore = async(values) =>{
+	
+	const res = await axios.patch('stores/edit_store_info', values)
+	return res
+}
+
+export const updateAStoreSocialMedia = async(values) =>{
+	
+	const res = await axios.patch('stores/edit_store_social_media', values )
+	return res
+}
+export const getAStore = async(values) =>{
+	
+	const res = await axios.patch('stores/fetch_one', values )
+	return res
+}
 
 export const searchAVendor = async(search_word)=>{
 	
@@ -54,7 +70,8 @@ export const getRatings = async(values)=>{
 	return res
 }
 
-export const getUser = async(values)=>{
+
+export const getVendorRatings = async(values)=>{
 	const res = await axios.post('ratings/get_ratings',values)
 	return res
 }

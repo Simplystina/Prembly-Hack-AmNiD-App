@@ -1,25 +1,26 @@
 import { Avatar, Box, Flex, HStack, Text, VStack } from '@chakra-ui/react'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { getVendorRatings} from "../../../../utils/services"
 
 const Reviews = () => {
-    const reviews = [
-        {
-            id: 1,
-            num: 2,
-        },
-        {
-            id: 1,
-            num: 2
-        },
-        {
-            id: 1,
-            num: 2
-        },
-        {
-            id: 1,
-            num: 2
+    const [ratingsData, setRatingsData] = useState([])
+
+      
+    const Reviews = async ()=>{
+        const user = JSON.parse(localStorage.getItem('user'))
+        console.log(user, "userrrrrrrrrrrr")
+        const values = {
+            vendor_id : user?.user_id
         }
-    ]
+        const data = await getVendorRatings(values)
+        console.log(data.data.data,"reviews dataa")
+        setRatingsData(data.data.data)
+    }
+    useEffect(()=>{
+        Reviews()
+
+    },[])
+
   return (
     <Box w={["100%","100%","45%"]}>
         <Flex justifyContent="space-between">
@@ -28,18 +29,19 @@ const Reviews = () => {
         </Flex>
         <VStack spacing={[[2,4]]}>
             {
-                reviews.map((item)=>{
+                ratingsData.map((item)=>{
+                    const {rater_name, rater_image, comment, rate} = item
                     return (
                         <Box key={item.id} bg="white" p="20px">
                             <Flex justifyContent="space-between" pb="10px">
                                 <HStack>
                                     <Avatar/>
-                                    <Text fontSize="15px" fontWeight="600" color="#ABAAAA">John Nate</Text>
+                                    <Text fontSize="15px" fontWeight="600" color="#ABAAAA">{rater_name}</Text>
                                 </HStack>
-                                <Text fontSize="12px" fontWeight="500" color="#ABAAAA">01 - 11- 22</Text>
+                                <Text fontSize="12px" fontWeight="500" color="#ABAAAA">{rate} stars</Text>
                             </Flex>
                             <Text fontSize="12px" lineHeight="18px" fontWeight="500">
-                            I have always been afraid of shopping online since the last time I went through a lot of stress and lost a whole lots of money...
+                            {comment}
                             </Text>
                         </Box>
                     )

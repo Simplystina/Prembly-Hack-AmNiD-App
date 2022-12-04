@@ -36,7 +36,7 @@ const Store = () => {
         getStores()
     },[])
   return (
-    <Box pb="50px" w={["100%","100%","50%"]}  borderRadius={6} m="20px 0" >
+    <Box pb={["20px", "30px"]} w={["100%","100%","50%"]}  borderRadius={6} m={["10px 0","20px 0"]} >
         <Text color="#ABAAAA" fontSize="20px" fontWeight={500}>Stores</Text>
         
         <TableContainer variant="unstyled">

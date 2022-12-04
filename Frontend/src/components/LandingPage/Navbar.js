@@ -11,8 +11,12 @@ const Navbar = () => {
         <Text fontWeight={600} fontSize={["20px","25px","30px"]} color="#008565">AmNiD</Text>
         <HStack display={["none", "none", "flex"]} spacing={10}>
             <Text fontWeight={600} fontSize="14px" color="#008565">Home</Text>
-            <Text fontWeight={600} fontSize="14px" color="#008565">Support</Text>
-            <Text fontWeight={600} fontSize="14px" color="#008565">FAQ</Text>
+            <Link href="#getstarted">
+               <Text fontWeight={600} fontSize="14px" color="#008565">Support</Text>
+            </Link>
+           <Link href="#faq">
+              <Text fontWeight={600} fontSize="14px" color="#008565">FAQ</Text>
+           </Link>
             
         </HStack>
         <HStack display={["none", "none","flex"]}>

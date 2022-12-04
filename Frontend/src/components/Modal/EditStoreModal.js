@@ -17,12 +17,26 @@ import { Box, Modal,
     IconButton,
     Input,
     Textarea, useToast} from '@chakra-ui/react'
-import React,{useRef, useState} from 'react'
-import { createStore } from '../../../utils/services'
+import React,{useEffect, useRef, useState} from 'react'
+import { createStore, getAStore } from '../../../utils/services'
+import {MdModeEdit, MdDelete} from "react-icons/md"
 
 
-const CreateStoreModal = () => {
 
+
+
+const EditStoreModal = ({id}) => {
+   
+    console.log(id, "iddddddd")
+
+    const getStore = async()=>{
+        const data = await getAStore({store_id:id})
+    }
+
+
+    useEffect(()=>{
+
+    })
     const { isOpen, onOpen, onClose } = useDisclosure()
     const finalRef = useRef(null)
 
@@ -135,8 +149,8 @@ const CreateStoreModal = () => {
 
   return (
     <Box >
-        <Button _hover={{border:"1px solid #008565", color:"#008565", bg:"white" }} bg="#008565" size={["sm","md","lg"]} color="white" w="100%" onClick={onOpen}>
-        Create a new store
+        <Button bg="green" color="white" w="100%" onClick={onOpen}>
+          <MdModeEdit/>
         </Button>
       <Modal finalFocusRef={finalRef} isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />
@@ -185,4 +199,4 @@ const CreateStoreModal = () => {
   )
 }
 
-export default CreateStoreModal
+export default EditStoreModal

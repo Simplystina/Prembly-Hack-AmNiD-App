@@ -2,7 +2,7 @@ import axios from 'axios'
 import  Router  from 'next/router'
 
 const server = axios.create({
-  baseURL: 'https://amnid-production.up.railway.app/',
+  baseURL: 'https://amnid-api.up.railway.app/',
   headers: {'Content-Type': 'application/json', 'Accept': 'application/json' },
 })
 
@@ -10,6 +10,9 @@ server.interceptors.request.use((config) => {
   let tokenData = localStorage.getItem("token")
   console.log(tokenData,"token")
  
+  if(!tokenData){
+    logoutUser()
+  }
  if (tokenData) {
 	console.log(config)
     config.headers['Authorization'] = `Bearer ${tokenData}`

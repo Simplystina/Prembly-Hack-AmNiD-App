@@ -7,12 +7,13 @@ import { Box, Table,
     Td,
     TableCaption,
     TableContainer,
-    HStack,  } from '@chakra-ui/react'
+    HStack, Flex, Img  } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import { AiFillFacebook, AiFillTwitterSquare, AiOutlineInstagram } from 'react-icons/ai'
 import {SiTiktok} from "react-icons/si"
 import {MdModeEdit, MdDelete} from "react-icons/md"
 import {getAllStores} from "../../../utils/services"
+import EditStoreModal from '../Modal/EditStoreModal'
 
 const StoreTableComponent = () => {
 
@@ -22,7 +23,7 @@ const StoreTableComponent = () => {
 
     const getStores = async ()=>{
         const user = JSON.parse(localStorage.getItem('user'))
-       console.log(user.user_id, "iddddddddddd")
+       console.log(user?.user_id, "iddddddddddd")
        try {
         const data = await getAllStores(user.user_id)
         console.log(data.data.stores, "dattaaa")
@@ -32,6 +33,10 @@ const StoreTableComponent = () => {
        }
     }
 
+
+    const editStore = ()=>{
+
+    }
    
    
     useEffect(()=>{
@@ -39,7 +44,13 @@ const StoreTableComponent = () => {
     },[])
   return (
     <Box bg="white" borderRadius={6} m="20px 0" >
-        <TableContainer variant="unstyled">
+        {
+            stores.length ===0?
+        <Flex  w="100%" h="300px">
+            <Img objectFit="contain"  m="0 auto" src="/images/no-store.png"/>
+        </Flex>
+        :
+            <TableContainer variant="unstyled">
             <Table variant="unstyled">
                 <Thead>
                     <Tr textTransform="capitalize">
@@ -66,9 +77,7 @@ const StoreTableComponent = () => {
                             </Td>
                             <Td>
                                 <HStack>
-                                    <Box color="green">
-                                       <MdModeEdit/>
-                                    </Box>
+                                    <EditStoreModal id={item.id}/>
                                     <Box color="red"><MdDelete/></Box>
                                 </HStack>
                             </Td>
@@ -78,8 +87,9 @@ const StoreTableComponent = () => {
                   }
             </Tbody>
         </Table>
-        </TableContainer>
+        </TableContainer>}
     </Box>
+                
   )
 }
 

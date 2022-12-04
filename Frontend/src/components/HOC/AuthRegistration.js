@@ -1,20 +1,29 @@
 import { Box, Flex, Img } from '@chakra-ui/react'
 import Link from 'next/link'
-import React from 'react'
+import React, { Children } from 'react'
 
 
-const AuthRegistration = ({children}) => {
-  return (
-    <Flex w="100%"  pos="relative">
-        <Box display={["none","block"]} w="50%"  pos="fixed" h="auto" top="0" left="0" minH="100%" bgImage={`url("/images/welcome-img.png")`}  bgRepeat="no-repeat" bgSize="cover" >
-            <Link href="/"><Box transition="all 0.5s linear" w="120px" h="55px" pos="absolute" top="20px" left="33px" ></Box></Link>
-            
-        </Box>
-        <Box w={["100%","50%"]} pos="absolute" right="0%" >
-            {children}
-        </Box>
-    </Flex>
-  )
+
+const AuthRegistration = (Children) => {
+  return (props)=>{
+
+    return(
+      (
+        <Flex w="100%"  pos="relative">
+            <Link href="/">
+               <Box  h="100%" pos="fixed" zIndex={1} top="0" overflowX="hidden" pt="20px" left="0" display={["none","block"]} w="50%"     bgImage={`url("/images/welcome-img.png")`}  bgRepeat="no-repeat" bgSize="cover" >
+                
+                
+                </Box>
+            </Link>
+            <Box h="100%" pos="fixed" zIndex={1} top="0" overflowX="hidden" pt="20px" right="0"  w={["100%","50%"]} >
+                <Children {...props}/>
+            </Box>
+        </Flex>
+      )
+    )
+  }
+
 }
 
 export default AuthRegistration

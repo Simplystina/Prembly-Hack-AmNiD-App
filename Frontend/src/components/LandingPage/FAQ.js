@@ -33,7 +33,7 @@ const faq = [
 ]
 const FAQ = () => {
   return (
-    <Box p={["10px 20px","20px 40px","30px 60px"]}>
+    <Box id="faq" p={["10px 20px","20px 40px","30px 60px"]}>
         <Text color="#2E2E2E" fontWeight="600" fontSize={["16px","20px","26px"]} textAlign="center">Frequently Asked Questions</Text>
         <Accordion m="0px auto" pt={["20px","40px","80px"]} pb="50px" w={["100%","90%","50%"]} allowToggle defaultIndex={[0]}>
             {

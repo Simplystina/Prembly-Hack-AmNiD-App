@@ -8,7 +8,7 @@ import { Drawer,
     DrawerCloseButton,Box,Text, useDisclosure, Button,
 VStack} from "@chakra-ui/react"
 import {AiOutlineMenu} from "react-icons/ai"
-import { Link } from 'next/link'
+import  Link  from 'next/link'
 
 export const SmallNavbar = () => {
 
@@ -41,9 +41,13 @@ export const SmallNavbar = () => {
                    
                       <VStack align="baseline">
                         
-                      <Button _hover={{bg:"white", color:"#008565", border:"1px solid #008565"}} bg="#008565" color="white" fontSize="14px">Login</Button>
+                      <Link href="/login">
+                         <Button _hover={{bg:"white", color:"#008565", border:"1px solid #008565"}} bg="#008565" color="white" fontSize="14px">Login</Button>
+                      </Link>
                           
+                        <Link href="/signup">
                           <Button _hover={{bg:"white", color:"#008565", border:"1px solid #008565"}} bg="#008565" color="white" fontSize="14px">Register</Button>
+                        </Link>
                      
                       </VStack>
           </DrawerBody>

@@ -4,7 +4,8 @@ import { RegistrationForm } from '../components'
 import Head from 'next/head'
 import AuthRegistration from '../components/HOC/AuthRegistration'
 import { registerUser } from '../../utils/services'
-const signup = () => {
+
+const Signup = () => {
 
    
   return (
@@ -18,11 +19,9 @@ const signup = () => {
                 key="description"
             />
     </Head>
-     <AuthRegistration>
-        <RegistrationForm/>
-     </AuthRegistration>
+    <RegistrationForm/>
   
     </>)
 }
 
-export default signup
+export default AuthRegistration(Signup)

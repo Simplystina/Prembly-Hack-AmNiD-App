@@ -4,7 +4,7 @@ import Head from 'next/head'
 import AuthRegistration from '../components/HOC/AuthRegistration'
 
 
-const login = () => {
+const Login = () => {
     
 
   return (
@@ -18,11 +18,9 @@ const login = () => {
                 key="description"
             />
     </Head>
-     <AuthRegistration>
-        <LoginForm/>
-     </AuthRegistration>
+       <LoginForm/>
   
     </>)
 }
 
-export default login
+export default AuthRegistration(Login)
