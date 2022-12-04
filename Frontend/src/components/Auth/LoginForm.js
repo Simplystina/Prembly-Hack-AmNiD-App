@@ -51,8 +51,6 @@ const LoginForm = () => {
                 isClosable: true,
               });
                if(ratings){
-                
-                
                 router.push({
                   pathname:'/'
                 , query: { homePage: 'true' }}

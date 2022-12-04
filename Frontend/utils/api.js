@@ -10,9 +10,7 @@ server.interceptors.request.use((config) => {
   let tokenData = localStorage.getItem("token")
   console.log(tokenData,"token")
  
-  if(!tokenData){
-    logoutUser()
-  }
+  
  if (tokenData) {
 	console.log(config)
     config.headers['Authorization'] = `Bearer ${tokenData}`
