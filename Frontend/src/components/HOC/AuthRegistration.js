@@ -1,10 +1,11 @@
 import { Box, Flex, Img } from '@chakra-ui/react'
 import Link from 'next/link'
-import React, { Children } from 'react'
+import React from 'react'
 
 
-
+// eslint-disable-next-line react/display-name
 const AuthRegistration = (Children) => {
+  // eslint-disable-next-line react/display-name
   return (props)=>{
 
     return(
