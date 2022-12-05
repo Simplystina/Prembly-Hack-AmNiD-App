@@ -1,9 +1,11 @@
 import { Box, Button, HStack, Text , Flex} from '@chakra-ui/react'
 import Link from 'next/link'
-import React from 'react'
+import React, { useState } from 'react'
 import { SmallNavbar } from './SmallNavbar'
 
-const Navbar = () => {
+const Navbar = () => {  
+
+ 
   return (
     <>
     

@@ -153,7 +153,7 @@ const RegistrationForm = () => {
                   bg="rgba(0, 133, 101, 1)"
                    w="full"
                     type="submit"
-                   
+                    
 								     isLoading={formik.isSubmitting}
                     > Register
                     </Button>   

@@ -8,11 +8,11 @@ const server = axios.create({
 
 server.interceptors.request.use((config) => {
   let tokenData = localStorage.getItem("token")
-  console.log(tokenData,"token")
+ // console.log(tokenData,"token")
  
   
  if (tokenData) {
-	console.log(config)
+	//console.log(config)
     config.headers['Authorization'] = `Bearer ${tokenData}`
   }
   return config

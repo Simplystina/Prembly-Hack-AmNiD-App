@@ -10,8 +10,9 @@ export const registerUser = async (values) => {
 	return res
 };
 
-export const createStore = async(values) =>{
-	const res = await axios.post('stores/create', values)
+
+export const getUserProfile = async(values) =>{
+	const res = await axios.post('users/get_social_media', values)
 	return res
 }
 
@@ -19,6 +20,18 @@ export const updateProfile = async(values) =>{
 	const res = await axios.patch('users/edit_user_info', values)
 	console.log(res)
 }
+export const updateSocialMediaProfile = async(values) =>{
+	const res = await axios.patch('users/edit_social_media', values)
+	console.log(res)
+}
+
+
+
+export const createStore = async(values) =>{
+	const res = await axios.post('stores/create', values)
+	return res
+}
+
 export const getAllStores = async(id) =>{
 	console.log(id, "idddddddddddddddd")
 	const res = await axios.post('stores/fetch_all', { user_id: id } )
@@ -35,9 +48,11 @@ export const updateAStoreSocialMedia = async(values) =>{
 	const res = await axios.patch('stores/edit_store_social_media', values )
 	return res
 }
+
+
 export const getAStore = async(values) =>{
 	
-	const res = await axios.patch('stores/fetch_one', values )
+	const res = await axios.post('stores/fetch_one', values )
 	return res
 }
 

@@ -53,9 +53,7 @@ const RatingModal = () => {
     setCurrentRate(id)
   }
   return (
-   <Box >
-      
-      
+   <Box>
       <Modal finalFocusRef={finalRef} isOpen={onOpen} onClose={onClose}>
         <ModalOverlay />
         <ModalContent>

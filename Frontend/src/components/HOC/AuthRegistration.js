@@ -10,14 +10,14 @@ const AuthRegistration = (Children) => {
 
     return(
       (
-        <Flex w="100%"  pos="relative">
+        <Flex w="100%"  pos="relative" flexDir={["column","row"]}>
             <Link href="/">
-               <Box  h="100%" pos="fixed" zIndex={1} top="0" overflowX="hidden" pt="20px" left="0" display={["none","block"]} w="50%"     bgImage={`url("/images/welcome-img.png")`}  bgRepeat="no-repeat" bgSize="cover" >
+               <Box  h={["200px","100%"]} pos={["static","fixed"]} zIndex={1} top="0" overflowX="hidden" pt="20px" left="0" w={["100%","50%"]}     bgImage={`url("/images/welcome-img.png")`}  bgRepeat="no-repeat" bgSize="cover" >
                 
                 
                 </Box>
             </Link>
-            <Box h="100%" pos="fixed" zIndex={1} top="0" overflowX="hidden" pt="20px" right="0"  w={["100%","50%"]} >
+            <Box h="100%" pos={["static","fixed"]} zIndex={1} top="0" overflowX="hidden" pt="20px" right="0"  w={["100%","50%"]} >
                 <Children {...props}/>
             </Box>
         </Flex>

@@ -51,7 +51,7 @@ const VerifyModal = ({setDisplayVendor, vendor}) => {
     localStorage.setItem("vendor_id", vendor.vendor_id); //storing the vendor's Id
   }
   return (
-   <Box w="50%">
+   <Box w={["100%","80%","50%"]}>
 
       <Button mt={4} onClick={onOpen} color="green" fontStyle="italic">
         Vendor found! Click to view details

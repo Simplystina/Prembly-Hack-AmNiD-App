@@ -18,7 +18,7 @@ import { Box, Modal,
     Input,
     Textarea, useToast} from '@chakra-ui/react'
 import React,{useEffect, useRef, useState} from 'react'
-import { createStore, getAStore } from '../../../utils/services'
+import { createStore, getAStore,updateAStore,updateAStoreSocialMedia } from '../../../utils/services'
 import {MdModeEdit, MdDelete} from "react-icons/md"
 
 
@@ -27,16 +27,10 @@ import {MdModeEdit, MdDelete} from "react-icons/md"
 
 const EditStoreModal = ({id}) => {
    
-    console.log(id, "iddddddd")
+    console.log(typeof id, "Store id")
+   
 
-    const getStore = async()=>{
-        const data = await getAStore({store_id:id})
-    }
-
-
-    useEffect(()=>{
-
-    })
+   
     const { isOpen, onOpen, onClose } = useDisclosure()
     const finalRef = useRef(null)
 
@@ -62,9 +56,29 @@ const EditStoreModal = ({id}) => {
         setInstagram('')
     }
 
+
+    const getStore = async()=>{
+
+        const values = {
+                    store_id:id
+                   }
+ 
+        const {data} = await getAStore(values)
+        console.log(data,data?.social_media?.facebook, "store data")
+        setName(data?.name)
+        setDesc(data?.description)
+        setTwitter(data?.social_media?.twitter)
+        setFacebook(data?.social_media?.facebook)
+        setTiktok(data?.social_media?.tiktok)
+        setInstagram(data?.social_media?.instagram)
+    }
+
+
+    useEffect(()=>{
+        getStore()
+    },[])
     const submit = async ()=>{
-    
-        console.log(name)
+
              
         if(name.trim()=== '' && desc.trim()=== ''){
             setNameError('Name is required')
@@ -91,45 +105,51 @@ const EditStoreModal = ({id}) => {
         const user = JSON.parse(localStorage.getItem('user'))
         console.log(user, "userrrrrrrrrrrr")
         
-        const values = {
-            
-        }
-        values.user_id = user.user_id
-        values.name = name
-        values.description = desc
+       
+        const storeValues = {}
+        storeValues.store_id = id,
+        storeValues.user_id = user.user_id
+        storeValues.name = name
+        storeValues.description = desc
         
 
+        const socialmediavalues = {}
+        socialmediavalues.store_id = id,
+        socialmediavalues.user_id = user.user_id
+
         if( facebook || tiktok || twitter || instagram){
-            values.social_media = {}
+            socialmediavalues.social_media = {}
         }
        
        
         if (facebook){
-            values.social_media.facebook = facebook
+            socialmediavalues.social_media.facebook = facebook
         }
         if(twitter){
-            values.social_media.twitter = twitter
+            socialmediavalues.social_media.twitter = twitter
         }
         if(tiktok){
-            values.social_media.tiktok = tiktok
+            socialmediavalues.social_media.tiktok = tiktok
         }
         if(instagram){
-            values.social_media.instagram = instagram
+            socialmediavalues.social_media.instagram = instagram
         }
 
-        console.log(values, "valuesssssssss")
+        console.log(socialmediavalues, "valuesssssssss")
 
 
       
         
         try {
-            const data = await createStore(values)
-            console.log(data, "dataa create store")
+            const updatedData = await updateAStore(storeValues)
+            const updatedSocialMediaData = await updateAStoreSocialMedia(socialmediavalues)
+            //updateAStore,updateAStoreSocialMedia
+            console.log(updatedSocialMediaData,updatedData, "dataa create store")
             clearInputs()
             toast({
                 position: "top-right",
-                title: "store created successfully",
-                description: "store has been created",
+                title: "store updated successfully",
+                description: "store has been updated",
                  status: "success",
                 isClosable: true,
               });
@@ -149,7 +169,7 @@ const EditStoreModal = ({id}) => {
 
   return (
     <Box >
-        <Button bg="green" color="white" w="100%" onClick={onOpen}>
+        <Button bg="green" color="white" _hover={{bg:"white",color:"green", border:"1px solid green"}} fontSize={40} w="70%" h="30px" onClick={onOpen}>
           <MdModeEdit/>
         </Button>
       <Modal finalFocusRef={finalRef} isOpen={isOpen} onClose={onClose}>
@@ -160,7 +180,7 @@ const EditStoreModal = ({id}) => {
           <ModalBody w="100%" >
           
                 <Box m="10px auto" >
-                    <Text color="#2E2E2E" fontWeight={600} fontSize="18px">Click to create a store</Text>
+                    <Text color="#2E2E2E" fontWeight={600} fontSize="18px">Edit store</Text>
                     <Text color="#747474" fontWeight={500} fontSize="14px" ></Text>              
                     <Box mt="10px">
                         <Text pb="10px" color="#000000" fontWeight={600} fontSize="14px" >Store Name</Text>
@@ -174,22 +194,22 @@ const EditStoreModal = ({id}) => {
                     </Box>
                     <Box mt="15px">
                         <Text pb="10px" color="#000000" fontWeight={600} fontSize="14px" >Facebook</Text>
-                        <Input placeholder='Enter your name' _placeholder={{fontSize:"12px"}}  onChange={(e)=>setFacebook(e.currentTarget.value)}/>
+                        <Input placeholder='Enter your name' _placeholder={{fontSize:"12px"}} value={facebook}  onChange={(e)=>setFacebook(e.currentTarget.value)}/>
                     </Box>
                     <Box mt="15px">
                         <Text pb="10px" color="#000000" fontWeight={600} fontSize="14px" >Twitter</Text>
-                        <Input placeholder='Enter your name' _placeholder={{fontSize:"12px"}}  onChange={(e)=>setTwitter(e.currentTarget.value)}/>
+                        <Input placeholder='Enter your name' _placeholder={{fontSize:"12px"}} value={twitter}  onChange={(e)=>setTwitter(e.currentTarget.value)}/>
                     </Box>
                     <Box mt="15px">
                         <Text pb="10px" color="#000000" fontWeight={600} fontSize="14px" >Instagram</Text>
-                        <Input placeholder='Enter your name' _placeholder={{fontSize:"12px"}}  onChange={(e)=>setInstagram(e.currentTarget.value)}/>
+                        <Input placeholder='Enter your name' _placeholder={{fontSize:"12px"}} value={instagram} onChange={(e)=>setInstagram(e.currentTarget.value)}/>
                     </Box>
                     <Box mt="15px">
                         <Text pb="10px" color="#000000" fontWeight={600} fontSize="14px" >Tiktok</Text>
-                        <Input placeholder='Enter your name' _placeholder={{fontSize:"12px"}}  onChange={(e)=>setTiktok(e.currentTarget.value)}/>
+                        <Input placeholder='Enter your name' _placeholder={{fontSize:"12px"}} value={tiktok}  onChange={(e)=>setTiktok(e.currentTarget.value)}/>
                     </Box>
                     
-                    <Button mt="15px" fontSize="13px" bg="#008565" w="100%" color="white" onClick={submit}>Submit</Button>
+                    <Button mt="15px" fontSize="13px" bg="#008565" w="100%" color="white" _hover={{bg:"#008565"}} onClick={submit}>update store</Button>
                 </Box>  
            
           </ModalBody>

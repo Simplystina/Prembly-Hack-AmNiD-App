@@ -43,15 +43,15 @@ const Index = () => {
   
     const [account, setAccount] = useState('')
     const [filled, setFilled] = useState(false)
-    const [verified, setVerified] = useState(false)
+    const [verified, setVerified] = useState('')
     
 
 
     useEffect(()=>{
       const user = JSON.parse(localStorage.getItem('user'))
-      console.log(user.verified, "userrrrrrrrrrrr")
-      setVerified(user.verified)
-    },[])
+      console.log(user, "userrrrrrrrrrrr")
+      setVerified(user?.verified)
+    },[verified])
 
     const getbanks = async()=>{
       const  data = await getBankList()
@@ -111,19 +111,17 @@ const Index = () => {
              }
 
              
-             toast({ 
-              position: "top-right",
-              title: "Successful Verification!",
-              description: "You have been successfully verified",
-              status: "success",
-              isClosable: true,
-            });
-             
-             
              try {
                const data =  await verify(parameters)
                console.log(data, "dataaa")
-
+               router.reload(window.location.pathname)
+               toast({ 
+                position: "top-right",
+                title: "Successful Verification!",
+                description: "You have been successfully verified",
+                status: "success",
+                isClosable: true,
+              });
              } catch (error) {
               console.log(error)
              }

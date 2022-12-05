@@ -21,12 +21,12 @@ const Index = () => {
 
     const user = JSON.parse(localStorage.getItem('user'))
     console.log(user?.user_id, "iddddddddddd")
-    const values = { vendor_id : user.user_id}
+    const values = { vendor_id : user?.user_id}
     try {
-      const storedata = await getAllStores(user.user_id)
+      const storedata = await getAllStores(user?.user_id)
       const ratingsdata = await getVendorRatings(values)
         console.log(ratingsdata.data,storedata.data, "data")
-        setRatings(ratingsdata.data.data)
+        setRatings(ratingsdata?.data?.data)
       
        setStores(storedata.data.stores)
    } catch (error) {

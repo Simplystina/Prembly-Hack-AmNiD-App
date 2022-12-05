@@ -19,7 +19,7 @@ const services =[
       id: 3,
       title: "Become a Buyer or Seller",
       content:"Easily switch from buyers account to become a seller with just a few steps.",
-      img:"/icons/buySell-icon.png"
+      img:"/icons/buysell-icon.png"
    }
 ]
 const Services = () => {

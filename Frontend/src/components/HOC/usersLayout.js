@@ -7,20 +7,21 @@ import DasboardLayout from '../Dashboard/DashboardLayout'
 
 // eslint-disable-next-line react/display-name
 const usersLayout = (WrappedComponent) => {
+  
   // eslint-disable-next-line react/display-name
   return (props)=>{
 
     const loggedUser = ()=>{
       let tokenData = localStorage.getItem("token")
     if(!tokenData){
-      logoutUser()
+      return logoutUser()
     }
 
     }
-
+  
     useEffect(()=>{
       loggedUser()
-    },[])
+    })
     return (
         <>
         <DasboardLayout>

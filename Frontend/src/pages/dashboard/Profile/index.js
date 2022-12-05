@@ -1,7 +1,7 @@
 import { Avatar, Box , Button, HStack, Text, Flex, Stack, Input, VStack, Tabs, TabList, TabPanels, Tab, TabPanel, useToast} from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import usersLayout from '../../../components/HOC/usersLayout'
-import {updateProfile} from "../../../../utils/services"
+import {updateProfile,updateSocialMediaProfile, getUserProfile} from "../../../../utils/services"
 
 const Index = () => {
  
@@ -16,23 +16,60 @@ const Index = () => {
     const [twitter, setTwitter] = useState('')
     const [facebook, setFacebook] = useState('')
     const [tiktok, setTiktok] = useState('')
-    const [instagram, setInstagram] = useState('')
-
+    const [instagram, setInstagram] = useState('') 
 
     const setDetails = (user)=>{
-      
       setFirstName(user?.first_name)
       setLastName(user?.last_name)
       setEmail(user?.email)
-     
+    }
+
+
+  
+    const getUserSocials = async(id)=>{
+       try {
+        const values = {user_id: id}
+        console.log(values, "values")
+        const {data:{social_media}} = await getUserProfile(values)
+          console.log(social_media , "social data")
+         setTwitter(social_media.twitter)
+         setInstagram(social_media.instagram)
+         setTiktok(social_media.tiktok)
+         setFacebook(social_media.facebook)
+       } catch (error) {
+        console.log(error)
+       }
     }
 
     
-    const savChanges = async ()=>{
+    const updateSocials = async()=>{
+       const  values = {
+        user_id : user.user_id,
+        social_media:{
+          facebook: facebook,
+          twitter: twitter,
+          tiktok: tiktok,
+          instagram: instagram }
+       }
+       try {
+        const updatedData = await updateSocialMediaProfile(values)
+        toast({
+          position: "top-right",
+          title: "User Info ",
+          description: "social media Info updated successfully",
+           status: "success",
+          isClosable: true,
+        });
+       } catch (error) {
+        console.log(error)
+        
+       }
 
+    }
+     
+
+    const savChanges = async ()=>{
       const user = JSON.parse(localStorage.getItem('user'))
-       
-    
       const values = {
         user_id : user.user_id,
         first_name : firstName,
@@ -44,7 +81,7 @@ const Index = () => {
      try {
        console.log(values,"valueeeeeeee")
        const data = await updateProfile(values)
-       console.log(data, "dataaaaaaaa")
+      
        localStorage.setItem("user", JSON.stringify(values))
        toast({
         position: "top-right",
@@ -59,15 +96,12 @@ const Index = () => {
       
     }
 
-    const saveSocial = ()=>{
-
-    }
+   
    useEffect(()=>{
     const userData = JSON.parse(localStorage.getItem('user'))
-        console.log(userData, "userrrrrrrrrrrr")
         setUser(userData)
-        console.log(userData.first_name)
-        setDetails(userData)
+       setDetails(userData)
+       getUserSocials(userData?.user_id)
    },[])
 
     
@@ -90,6 +124,9 @@ const Index = () => {
         
         <TabPanels>
           <TabPanel>
+          
+           <>
+           {user?.verified ===false ?<Box>
              <VStack mt="80px" w="100%" spacing="7">
                 <Stack direction={["column","row"]} w="100%" spacing={[3,5,7]} >
                    <Text w={["100%","20%"]} color="#747474" fontWeight="600" fontSize={["16px","18px"]}>Full Name</Text>
@@ -105,8 +142,35 @@ const Index = () => {
               
            </VStack>
            <Flex justifyContent="center" mt={["15px","30px"]}>
-                  <Button bg="#008565" color="white" fontSize="14px" w={["230px","300px"]} h={["40px","50px"]} onClick={savChanges}>Save Changes</Button>
+                  <Button bg="#008565" color="white" fontSize="14px" _hover={{bg:"#008565"}} w={["230px","300px"]} h={["40px","50px"]} onClick={savChanges}>Save Changes
+                  </Button>
           </Flex>
+          </Box>
+          :
+          <Box>
+            <Text fontSize={16} color="#008565" fontStyle="italic">Update disabled because you're verified already!</Text>
+             <VStack mt="80px" w="100%" spacing="7">
+                <Stack direction={["column","row"]} w="100%" spacing={[3,5,7]} >
+                   <Text w={["100%","20%"]} color="#747474" fontWeight="600" fontSize={["16px","18px"]}>Full Name</Text>
+                   <HStack w={["100%","50%"]} spacing={[2,5]}>
+                      <Input isDisabled border="1px solid #ABAAAA" p="10px" variant='unstyled' value={firstName} onChange={(e)=>setFirstName(e.currentTarget.value)} placeholder='first name'/>
+                     <Input isDisabled border="1px solid #ABAAAA" p="10px" variant='unstyled' placeholder='last name' value={lastName} onChange={(e)=>setLastName(e.currentTarget.value)}/>
+                  </HStack>
+              </Stack>
+              <Stack direction={["column","row"]} w="100%" spacing="7" >
+                <Text  w={["100%","20%"]} color="#747474" fontWeight="600" fontSize={["16px","18px"]}>Email address</Text>
+                <Input isDisabled w={["100%","50%"]} border="1px solid #ABAAAA" p="10px" variant='unstyled' placeholder='Email address' value={email} onChange={(e)=>setEmail(e.currentTarget.value)}/>
+              </Stack>
+              
+             </VStack>
+             <Flex justifyContent="center" mt={["15px","30px"]}>
+                  <Button isDisabled bg="#008565" color="white" fontSize="14px" _hover={{bg:"#008565"}} w={["230px","300px"]} h={["40px","50px"]} onClick={savChanges}>Save Changes
+                  </Button>
+             </Flex>
+          </Box>
+        }
+          </>
+       
           </TabPanel>
           <TabPanel>
              <VStack mt="80px" w="100%" spacing="7">
@@ -128,7 +192,7 @@ const Index = () => {
                </Stack>
              </VStack>
              <Flex justifyContent="center" mt={["15px","30px"]}>
-               <Button bg="#008565" color="white" fontSize="14px" w={["230px","300px"]} h={["40px","50px"]} onClick={saveSocial}>Save Changes</Button>
+               <Button bg="#008565" color="white" fontSize="14px" w={["230px","300px"]} h={["40px","50px"]} _hover={{bg:"#008565"}} onClick={updateSocials}>Save Changes</Button>
            </Flex>
           </TabPanel>
         </TabPanels>

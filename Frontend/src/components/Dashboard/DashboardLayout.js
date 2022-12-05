@@ -1,5 +1,5 @@
 import { Avatar, Box, Flex, HStack, Text } from '@chakra-ui/react'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import DashboardMenu from './DashboardMenu'
 import {FiLogOut} from "react-icons/fi"
 import { logoutUser } from '../../../utils/api'
@@ -7,7 +7,12 @@ import { useRouter } from 'next/router'
 import DashboardSidebar from './DashboardSidebar'
 
 const DasboardLayout = ({children}) => {
-
+    
+     const [user, setUser] = useState({})
+	useEffect(()=>{
+		const userData = JSON.parse(localStorage.getItem('user'))
+        setUser(userData)
+	},[])
 	
   return (
     <Flex  w="full" >
@@ -41,16 +46,16 @@ const DasboardLayout = ({children}) => {
 				    <Flex justify="flex-end" p="20px">
                         <Avatar/>
                      <Box>
-                        <Text color="#2E2E2E" fontWeight={600} fontSize="16px">J.K Stores</Text>
-                        <Text color="#747474" fontWeight={500} fontSize="14px">John Kennedy</Text>
+                        <Text color="#2E2E2E" fontWeight={600} fontSize="16px">{user?.first_name}</Text>
+                        <Text color="#747474" fontWeight={500} fontSize="14px">{user?.last_name}</Text>
                      </Box>
                     </Flex>
 				</Flex>
 				<Flex justify="flex-end" p="20px" display={["none", "none", "flex"]}>
                         <Avatar/>
                      <Box>
-                        <Text color="#2E2E2E" fontWeight={600} fontSize="16px">J.K Stores</Text>
-                        <Text color="#747474" fontWeight={500} fontSize="14px">John Kennedy</Text>
+					    <Text color="#2E2E2E" fontWeight={600} fontSize="16px">{user?.first_name}</Text>
+                        <Text color="#747474" fontWeight={500} fontSize="14px">{user?.last_name}</Text>
                      </Box>
                 </Flex>
 				
@@ -58,6 +63,8 @@ const DasboardLayout = ({children}) => {
 				    
 					px={["4", "4", "4"]}
 					bg="#f3f5f7"
+					h="100%"
+					overflowY="auto"
 				>
 					{children}
 				</Box>

@@ -133,6 +133,7 @@ const LoginForm = () => {
                   bg="rgba(0, 133, 101, 1)" 
                   w="full"
                   type='submit'
+                  _hover={{bg:"rgba(0, 133, 101, 1)"}}
                   > Login
                     </Button>   
                     <Text fontSize={["14px","16px"]} fontWeight={500} color="rgba(0, 0, 0, 1)" p="10px 0" textAlign="center">
