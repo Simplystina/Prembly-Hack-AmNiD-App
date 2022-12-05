@@ -29,7 +29,7 @@ const UsersReview = () => {
         { 
         ratingsData.length==0? 
         <Flex  justifyContent="center">
-            <Img w="300px" h="300px" m="0 auto" borderRadius="50%" src="/images/no-reviews.png"/>
+            <Img objectFit="contain" w="300px" h="300px" m="0 auto" borderRadius="50%" src="/images/no-reviews.png"/>
         </Flex>
         :
         <VStack spacing={[4]}>

@@ -109,8 +109,8 @@ const Index = () => {
       <> 
       {
         stores.length==0 && ratings.length==0?
-        <Flex m="20px 0" justifyContent="center"  w="100%">
-            <Img objectFit="contain"  src="/images/dashboard-no-reviews.png"/>
+        <Flex m="20px 0" justifyContent="center"  w="100%" >
+            <Img objectFit="contain" src="/images/dashboard-no-reviews.png"/>
         </Flex>
         : stores.length ===0 && ratings.length != 0?
 

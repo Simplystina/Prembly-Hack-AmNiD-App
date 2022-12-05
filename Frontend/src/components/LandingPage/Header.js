@@ -59,7 +59,7 @@ const Header = () => {
             </Text>
 
             <HStack m={["20px 0","40px 0"]} borderRadius={6} p="10px" border="1px solid #ABAAAA"  >
-               <Input variant='unstyled'   placeholder='Search by vendor Id, store name...' outline="none" value={searchWord} onChange=
+               <Input variant='unstyled'   placeholder='Search by id e.g amn001, amn002...' outline="none" value={searchWord} onChange=
                {handleChange}/>
                <SearchIcon/>
             </HStack>

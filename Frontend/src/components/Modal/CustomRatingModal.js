@@ -112,7 +112,7 @@ const closeModal =()=> {
     <>
     <Box  display="flex" justifyContent="center">
         <div id="myModal" class="modal">
-            <Box w={["80%","70%",null,"50%" ]}>
+            <Box w={["100%","80%",null,"50%" ]}>
              <div class="modal-content">
                 <div class="modal-header">
                     <span onClick={closeModal} class="close"><AiOutlineClose/></span>

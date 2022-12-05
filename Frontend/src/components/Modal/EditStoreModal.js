@@ -7,18 +7,13 @@ import { Box, Modal,
     ModalCloseButton,
     useDisclosure,
     Button, 
-    Lorem, 
-    Img, 
-    Flex,
+    
     Text,
-    Heading,
-    VStack,
-    HStack,
-    IconButton,
+   
     Input,
     Textarea, useToast} from '@chakra-ui/react'
 import React,{useEffect, useRef, useState} from 'react'
-import { createStore, getAStore,updateAStore,updateAStoreSocialMedia } from '../../../utils/services'
+import {  getAStore,updateAStore,updateAStoreSocialMedia } from '../../../utils/services'
 import {MdModeEdit, MdDelete} from "react-icons/md"
 
 
@@ -27,9 +22,6 @@ import {MdModeEdit, MdDelete} from "react-icons/md"
 
 const EditStoreModal = ({id}) => {
    
-    console.log(typeof id, "Store id")
-   
-
    
     const { isOpen, onOpen, onClose } = useDisclosure()
     const finalRef = useRef(null)
@@ -76,7 +68,7 @@ const EditStoreModal = ({id}) => {
 
     useEffect(()=>{
         getStore()
-    },[])
+    },[id])
     const submit = async ()=>{
 
              

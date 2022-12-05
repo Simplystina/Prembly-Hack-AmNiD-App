@@ -1,4 +1,4 @@
-import { Box, HStack, Text , VStack, Stack, useToast, Input, Button, Img, Select, Flex} from '@chakra-ui/react'
+import { Box, HStack, Text , VStack, Stack, useToast, Input, Button, Img, Center, Select, Flex, Spinner} from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import usersLayout from '../../../components/HOC/usersLayout'
 import { useFormik } from 'formik';
@@ -42,8 +42,8 @@ const Index = () => {
     const [banks, setBanks] = useState([])
   
     const [account, setAccount] = useState('')
-    const [filled, setFilled] = useState(false)
     const [verified, setVerified] = useState('')
+    const [loading, setLoading] = useState(false)
     
 
 
@@ -93,8 +93,9 @@ const Index = () => {
              user_id: user.user_id,
              bank_code: values.bank_code,
              number: values.account_number,
-             }                                                                   
-             const account_details = {}                                                      
+             }                                                                  
+             const account_details = {}        
+             setLoading(true)                                              
              const accountData = await getAccountName(dataValues)
             
              account_details["account_name"] = accountData.data.account_name
@@ -113,8 +114,12 @@ const Index = () => {
              
              try {
                const data =  await verify(parameters)
-               console.log(data, "dataaa")
-               router.reload(window.location.pathname)
+               console.log(data, "verified dataaa")
+               const user = JSON.parse(localStorage.getItem('user'))
+               const values = {...user, verified:true}
+               localStorage.setItem("user", JSON.stringify(values)) //update local stoarge
+               setVerified(true)
+               //router.reload(window.location.pathname)
                toast({ 
                 position: "top-right",
                 title: "Successful Verification!",
@@ -123,13 +128,29 @@ const Index = () => {
                 isClosable: true,
               });
              } catch (error) {
-              console.log(error)
+              console.log(error, "error")
+             }finally{
+              setLoading(false)
              }
             
         },
       });
 
+      if(loading){
+        return (
+          <Center  h="100%" w="100%" m="0 auto"><Spinner
+          thickness='4px'
+          speed='0.65s'
+          emptyColor='gray.200'
+          color='blue.500'
+          size='xl'
+        /></Center>
+        )
+      }
+
   return (
+    <>
+    
     <Box>
         <HStack>
            <Text color="#747474" fontSize={["20px","25px"]} fontWeight="500">Dashboard</Text>
@@ -239,7 +260,12 @@ const Index = () => {
         </Flex>
       }
     </Box>
+    </>
   )
 }
 
 export default usersLayout(Index)
+
+/*
+
+*/
