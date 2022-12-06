@@ -110,26 +110,27 @@ const closeModal =()=> {
 
   return (
     <>
-    <Box  display="flex" justifyContent="center">
+    <Box  display="flex" justifyContent="center" zIndex={5}>
         <div id="myModal" class="modal">
-            <Box w={["100%","80%",null,"50%" ]}>
+            <Box w={["100%","90%",null,"50%" ]} >
+            
              <div class="modal-content">
-                <div class="modal-header">
+             <div class="modal-header">
                     <span onClick={closeModal} class="close"><AiOutlineClose/></span>
                 </div>
-            <div class="modal-body">
-            <Flex justifyContent="center">
-                 <Box m="10px auto" >
+               <div class="modal-body">
+                 <Flex justifyContent="center" alignItems="center">
+                    <Box m="10px auto" w="100%"  >
                        <Text color="#2E2E2E" fontWeight={600} fontSize="18px">Hi There, Welcome</Text>
                         <Text p="20px 0" color="#747474" fontWeight={500} fontSize="14px" >Thank you for taking your time to rate this vendor</Text> 
                         <Text color="#747474" fontWeight={600}  fontSize="15px" >How was your experience with this vendor?</Text> 
-                       <HStack spacing={4} pt="10px">
+                       <HStack spacing={[2,4]} pt="10px" flexWrap="wrap">
                           {
                           ratings.map((rate)=>{
                               return(
                                   <Box key={rate.id} onClick={()=>ratingsInfo(rate.id)}>
                                       <Flex 
-                                          border="1px solid #ABAAAA" p="18px" borderRadius={6} justifyContent="center" alignItems="center" 
+                                          border="1px solid #ABAAAA" p={["12px","14px","18px"]} borderRadius={6} justifyContent="center" alignItems="center" 
                                            color={currentRate>=rate.id?"#FFCC16": "#A8A8A7"}
                                           _hover={{color:"#FFCC16"}}
                                         >

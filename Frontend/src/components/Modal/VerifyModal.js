@@ -14,11 +14,14 @@ import { Box,Modal,
     Heading,
     VStack,
     HStack,
+    Avatar,
     Center} from '@chakra-ui/react'
 import React,{useEffect, useRef, useState} from 'react'
 import {AiFillStar} from "react-icons/ai"
 import RatingModal from './RatingModal'
 import { useRouter } from 'next/router'
+import {getVendorRatings} from "../../../utils/services"
+import Reviews from '../../pages/dashboard/Reviews'
 
 const VerifyModal = ({setDisplayVendor, vendor}) => {
     const { isOpen, onOpen, onClose } = useDisclosure()
@@ -50,6 +53,23 @@ const VerifyModal = ({setDisplayVendor, vendor}) => {
     , '/');  
     localStorage.setItem("vendor_id", vendor.vendor_id); //storing the vendor's Id
   }
+
+  const [ratingsData, setRatingsData] = useState([])
+  const [displayReviews, setDisplayReviews] = useState(false)
+
+    
+  const Reviews = async ()=>{
+      
+      const values = {
+          vendor_id : vendor?.vendor_id
+      }
+      const data = await getVendorRatings(values)
+      console.log(data.data.data,"reviews dataa")
+      setRatingsData(data.data.data)
+  }
+ useEffect(()=>{
+  Reviews()
+ },[])
   return (
    <Box w={["100%","80%","50%"]}>
 
@@ -90,8 +110,28 @@ const VerifyModal = ({setDisplayVendor, vendor}) => {
                         <Box  color="#FFCC16"><AiFillStar/></Box>
                         <Text fontSize={14}>...{vendor.rate}/5 out of {vendor.rating_count} ratings</Text>
                     </HStack>
-                    <Text  p="40px 0" textAlign="center"  fontSize="15px" color="#008565" fontWeight={600} cursor="pointer" >See Reviews</Text>
-                    
+                    <Text cursor="pointer" p="40px 0" textAlign="center"  fontSize="15px" color="#008565" fontWeight={600}  onClick={()=>setDisplayReviews(!displayReviews)}>See Reviews</Text>
+                    {displayReviews && <VStack spacing={[[2,4]]} m="10px 0" w="100%" align="normal" h={ ratingsData.length>=3 ?"300px": "unset"} overflowY={ratingsData.length>=3 ?"scroll": "auto"}>
+                       {
+                        ratingsData.map((item)=>{
+                            const {rater_name, rater_image, comment, rate} = item
+                              return (
+                              <Box  w="100%" key={item.id} bg="whitesmoke" p="20px">
+                                 <Flex justifyContent="space-between" pb="10px">
+                                   <HStack>
+                                   
+                                    <Text fontSize="15px" fontWeight="600" color="#ABAAAA">{rater_name}</Text>
+                                  </HStack>
+                                  <Text fontSize="12px" fontWeight="500" color="#ABAAAA">{rate} stars</Text>
+                               </Flex>
+                                <Text fontSize="12px" lineHeight="18px" fontWeight="500">
+                               {comment}
+                               </Text>
+                         </Box>
+                           )
+                          })
+                        }
+                      </VStack>}
                     <Button bg="#008565" w="100%" color="white"  _hover={{color:"white"}} onClick={rateVendor}>
                           Rate this Vendor
                     </Button>

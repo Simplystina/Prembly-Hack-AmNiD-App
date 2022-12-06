@@ -4,6 +4,7 @@
 
 html{
   scroll-behavior: smooth;
+  overflow-y: scroll;
 }
 
 body {
@@ -12,8 +13,10 @@ body {
   font-family: Inter !important;
   max-width: 100% !important;
   overflow-x: hidden !important;
-
-}
+  height: 100%;
+  overflow-y: auto;
+  
+  }
 
 a {
   color: inherit;
@@ -43,7 +46,7 @@ a {
 
 /* Modal Content */
 .modal-content {
-  position: relative;
+  
   background-color: #fefefe;
   margin: auto;
   padding: 0;
@@ -55,6 +58,7 @@ a {
   animation-name: animatetop;
   animation-duration: 0.4s
 }
+
 
 /* Add Animation */
 @-webkit-keyframes animatetop {
@@ -83,7 +87,7 @@ a {
 }
 
 .modal-header {
-  padding: 10px 16px;
+ 
   color: rgba(128, 128, 128, 0.653);
 }
 .modal-header span{
@@ -96,4 +100,11 @@ a {
   padding: 2px 16px;
   background-color: #5cb85c;
   color: white;
+}
+
+
+@media screen and(max-width: 400px){
+  .modal-content {
+    width: 100%;
+  }
 }

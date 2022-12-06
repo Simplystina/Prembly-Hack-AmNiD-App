@@ -15,7 +15,7 @@ const DasboardLayout = ({children}) => {
 	},[])
 	
   return (
-    <Flex  w="full" >
+    <Flex  w="full" h="100vh">
 			<Box 
 				w="56"
 				borderRightWidth="thin"
@@ -39,7 +39,7 @@ const DasboardLayout = ({children}) => {
 
 			<Flex  minWidth="0"
 					 minH="0"
-					 overflowX="hidden" flexDir="column" bg="#F7F7F7" flex="1">
+					 overflowX="hidden" h="100%" flexDir="column" bg="#F7F7F7" flex="1">
 			
 				<Flex w="100%" justifyContent="space-between" display={["flex","flex","none"]}>
 					<DashboardSidebar/>
@@ -64,7 +64,6 @@ const DasboardLayout = ({children}) => {
 					px={["4", "4", "4"]}
 					bg="#f3f5f7"
 					h="100%"
-					overflowY="auto"
 				>
 					{children}
 				</Box>

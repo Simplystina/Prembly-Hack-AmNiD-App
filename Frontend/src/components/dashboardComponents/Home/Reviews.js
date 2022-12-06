@@ -27,12 +27,12 @@ const Reviews = () => {
             <Text color="#ABAAAA" fontSize={["16px","20px"]} fontWeight={500}>Reviews</Text>
             <Text color="#008565" fontSize={["13px","15px"]} fontWeight={500}>All Reviews</Text>
         </Flex>
-        <VStack spacing={[[2,4]]}>
+        <VStack spacing={[[2,4]]} w="100%" align="normal">
             {
                 ratingsData.map((item)=>{
                     const {rater_name, rater_image, comment, rate} = item
                     return (
-                        <Box key={item.id} bg="white" p="20px">
+                        <Box  w="100%" key={item.id} bg="white" p="20px">
                             <Flex justifyContent="space-between" pb="10px">
                                 <HStack>
                                     <Avatar/>
