@@ -2,7 +2,7 @@ import axios from 'axios'
 import  Router  from 'next/router'
 
 const server = axios.create({
-  baseURL: 'https://amnid.onrender.com',
+  baseURL: 'https://amnid-5p3h.onrender.com',
   headers: {'Content-Type': 'application/json', 'Accept': 'application/json' },
 })
 
